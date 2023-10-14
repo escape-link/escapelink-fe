@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header>
       <h1>Escape Link</h1>
-      <img className='alien' src={alien} alt='image of an alien'/>
+      <img className='alien' src={alien} alt='alien'/>
     </header>
   )
 }
