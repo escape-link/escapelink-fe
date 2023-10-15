@@ -1,0 +1,89 @@
+.room {
+  background-image: var(--room-bg);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  padding: 0 2rem;
+  grid-template-columns: 1fr 1fr 1fr 1.5fr 0.5fr;
+  grid-template-rows: .9fr .7fr 1.4fr;
+  grid-template-areas: 
+    'clock board board board lamp'
+    'bike door door desk lamp'
+    'plant door door desk radio ';
+}
+
+.clock-btn,
+.plant-btn,
+.door-btn,
+.bike-btn,
+.board-btn,
+.desk-comp-btn,
+.radio-btn,
+.lamp-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.clock-btn {
+  margin: -4rem 0rem 0rem;
+  display: flex;
+}
+
+.plant-btn {
+  grid-area: plant;
+  display: flex;
+}
+
+.door-btn {
+  grid-area: door;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.door { 
+  grid-area: door;
+  width: 50em;
+  padding-top: 2em;
+}
+
+.bike-btn {
+  grid-area: bike;
+  display: flex;
+  overflow: hidden;
+}
+
+.bike {
+  width: 15em;
+}
+
+.board-btn {
+  overflow: hidden;
+  grid-area: board;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  width: 30em;
+}
+
+.desk-comp-btn {
+  grid-area: desk;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-btn {
+  display: flex;
+}
+
+.lamp-btn {
+  grid-area: lamp;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
