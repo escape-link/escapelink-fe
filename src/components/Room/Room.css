@@ -1,3 +1,8 @@
+.room.no-bg {
+  background-image: none;
+  background-color: black;
+}
+
 .room {
   background-image: var(--room-bg);
   background-size: cover;
