@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PuzzleOne from "../PuzzleOne/PuzzleOne";
 import PuzzleTwo from "../PuzzleTwo/PuzzleTwo";
 import PuzzleFour from "../PuzzleFour/PuzzleFour";
+import PuzzleFive from "../PuzzleFive/PuzzleFive";
 import "./Room.css";
 import blueBackground from "../../assets/room/blue-bg.png";
 import clock from "../../assets/room/clock.png";
@@ -17,6 +18,7 @@ export default function Room() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
   const [showPuzzleFour, setShowPuzzleFour] = useState(false);
+  const [showPuzzleFive, setShowPuzzleFive] = useState(false);
 
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
@@ -41,6 +43,14 @@ export default function Room() {
     setShowPuzzleFour(false);
   };
 
+  const handleBikeClick = () => {
+    setShowPuzzleFive(true);
+  };
+
+  const handleClosePuzzleFive = () => {
+    setShowPuzzleFive(false);
+  };
+
   return (
     <article className="room" style={{ "--room-bg": `url(${blueBackground})` }}>
       <button className="clock-btn">
@@ -49,7 +59,7 @@ export default function Room() {
       <button className="plant-btn" onClick={handlePlantClick}>
         <img className="plant" src={plant} alt="plant" />
       </button>
-      <button className="bike-btn">
+      <button className="bike-btn" onClick={handleBikeClick}>
         <img className="bike" src={bike} alt="bike" />
       </button>
       <button className="door-btn">
@@ -73,6 +83,8 @@ export default function Room() {
       {showPuzzleTwo && <PuzzleTwo onClose={handleClosePuzzleTwo} />}
 
       {showPuzzleFour && <PuzzleFour onClose={handleClosePuzzleFour} />}
+
+      {showPuzzleFive && <PuzzleFive onClose={handleClosePuzzleFive} />}
     </article>
   );
 }
