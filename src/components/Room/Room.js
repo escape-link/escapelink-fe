@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Puzzle1 from '../Puzzle1/PuzzleOne'
+import PuzzleOne from '../PuzzleOne/PuzzleOne'
+import PuzzleFour from '../PuzzleFour/PuzzleFour'
 import './Room.css'
 import blueBackground from '../../assets/room/blue-bg.png'
 import clock from '../../assets/room/clock.png'
@@ -15,20 +16,29 @@ import deskComp from '../../assets/room/desk-comp.png'
 import bike from '../../assets/room/bike-front.png'
 
 export default function Room() {
-  const [showPuzzle1, setShowPuzzle1] = useState(false);
+  const [showPuzzleOne, setShowPuzzleOne] = useState(false);
+  const [showPuzzleFour, setShowPuzzleFour] = useState(false)
 
   const handleDeskCompClick = () => {
-    setShowPuzzle1(true);
+    setShowPuzzleOne(true);
   };
 
-  const handleClosePuzzle1 = () => {
-    setShowPuzzle1(false);
+  const handleClosePuzzleOne = () => {
+    setShowPuzzleOne(false);
+  };
+
+  const handlePlantClick = () => {
+    setShowPuzzleFour(true);
+  };
+
+  const handleClosePuzzleFour = () => {
+    setShowPuzzleFour(false);
   };
 
   return (
     <article className='room' style={{ '--room-bg': `url(${blueBackground})` }}>
       <button className='clock-btn'><img className='clock' src={clock} alt='clock' /></button>
-      <button className='plant-btn'><img className='plant' src={plant} alt='plant' /></button>
+      <button className='plant-btn' onClick={handlePlantClick}><img className='plant' src={plant} alt='plant' /></button>
       <button className='bike-btn'><img className='bike' src={bike} alt='bike' /></button>
       <button className='door-btn'><img className='door' src={door} alt='door' /></button>
       <button className='board-btn'><img className='board' src={board} alt='board' /></button>
@@ -36,8 +46,11 @@ export default function Room() {
       <button className='lamp-btn'><img className='lamp' src={lamp} alt='lamp' /></button>
       <button className='radio-btn'><img className='radio' src={radio} alt='radio' /></button>
 
-      {showPuzzle1 && (
-        <Puzzle1 onClose={handleClosePuzzle1} />
+      {showPuzzleOne && (
+        <PuzzleOne onClose={handleClosePuzzleOne} />
+      )}
+      {showPuzzleFour && (
+        <PuzzleFour onClose={handleClosePuzzleFour} />
       )}
     </article>
   );
