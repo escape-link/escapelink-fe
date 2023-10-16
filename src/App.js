@@ -15,7 +15,7 @@ function App() {
           </>
           } 
           />
-        <Route path='/room' element={<Room />}/>
+        <Route path='/room/:roomName' element={<Room />}/>
       </Routes>
     
     </div>

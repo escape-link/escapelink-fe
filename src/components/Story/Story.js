@@ -3,9 +3,21 @@ import './Story.css'
 // import background from '../../assets/ufo2.jpg'
 // import background from '../../assets/donut.jpg'
 import background from '../../assets/big-donut.jpg'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import fetchGameLink from '../../apiCalls'
 
 export default function Story() {
+  const navigate = useNavigate()
+  
+  const startGame = async () => {
+   try {
+    const roomName = await fetchGameLink()
+    navigate(`/room/${roomName.room_name}`)
+   } catch (err) {
+    console.log(`${err.message}`)
+   }
+  }
+
   return (
     <section className='landing-page-body' style={{'--background': `url(${background})`}} >
       <div className='story-and-button'>
@@ -17,7 +29,7 @@ export default function Story() {
           Suffice it to say, Bob’s a weird guy. But he’s our weird guy. On base, we have a sacred tradition called Doughnut Friday. In the 37 years Bob’s worked here, he has never missed a Doughnut Friday. Ever. The last time anyone saw him was last Friday, and our night janitors mentioned they never saw him leave. Our base commander is the only one who’s known Bob since he started here - and he’s put the base on lockdown and issued an access override. It’s time to head into Bob’s office to find any clues we can."
         
         </div>
-        <Link to={'/room'} className='start-game'>Start Game</Link>
+        <button className='start-game' onClick={startGame}>Start Game</button>   
       </div>
  
     </section>
