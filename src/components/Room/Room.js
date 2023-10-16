@@ -30,8 +30,6 @@ export default function Room() {
     setShowPuzzleThree(false);
   };
 
-  
-  
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
   };
