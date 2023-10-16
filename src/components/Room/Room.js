@@ -17,6 +17,16 @@ export default function Room() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
   const [showPuzzleFour, setShowPuzzleFour] = useState(false);
+  const [showPuzzleThree, setShowPuzzleThree] = useState(false);
+
+  const handleClockClick = () => {
+    setShowPuzzleThree(true);
+  };
+
+  const handleClosePuzzleThree = () => {
+    setShowPuzzleThree(false);
+  };
+  {showPuzzleThree && <PuzzleThree onClose={handleClosePuzzleThree} />}
 
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
