@@ -1,28 +1,35 @@
-import React, { useState } from 'react'
-import Puzzle1 from '../Puzzle1/PuzzleOne'
-import './Room.css'
-import blueBackground from '../../assets/room/blue-bg.png'
-import clock from '../../assets/room/clock.png'
-import plant from '../../assets/room/plant.png'
-import door from '../../assets/room/door.png'
-import board from '../../assets/room/board.png'
-// import bike from '../../assets/room/bike.png'
-import radio from '../../assets/room/radio.png'
-// import desk from '../../assets/room/desk.png'
-// import laptop from '../../assets/room/laptop.png'
-import lamp from '../../assets/room/lamp.png'
-import deskComp from '../../assets/room/desk-comp.png'
-import bike from '../../assets/room/bike-front.png'
+import React, { useState } from 'react';
+import PuzzleOne from '../PuzzleOne/PuzzleOne';
+import PuzzleTwo from '../PuzzleTwo/PuzzleTwo'; 
+import './Room.css';
+import blueBackground from '../../assets/room/blue-bg.png';
+import clock from '../../assets/room/clock.png';
+import plant from '../../assets/room/plant.png';
+import door from '../../assets/room/door.png';
+import board from '../../assets/room/board.png';
+import radio from '../../assets/room/radio.png'; 
+import lamp from '../../assets/room/lamp.png';
+import deskComp from '../../assets/room/desk-comp.png';
+import bike from '../../assets/room/bike-front.png';
 
 export default function Room() {
-  const [showPuzzle1, setShowPuzzle1] = useState(false);
+  const [showPuzzleOne, setShowPuzzleOne] = useState(false);
+  const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
 
   const handleDeskCompClick = () => {
-    setShowPuzzle1(true);
+    setShowPuzzleOne(true);
   };
 
-  const handleClosePuzzle1 = () => {
-    setShowPuzzle1(false);
+  const handleClosePuzzleOne = () => {
+    setShowPuzzleOne(false);
+  };
+
+  const handleRadioClick = () => {
+    setShowPuzzleTwo(true);
+  };
+
+  const handleClosePuzzleTwo = () => {
+    setShowPuzzleTwo(false);
   };
 
   return (
@@ -34,10 +41,14 @@ export default function Room() {
       <button className='board-btn'><img className='board' src={board} alt='board' /></button>
       <button className='desk-comp-btn' onClick={handleDeskCompClick}><img className='desk-comp' src={deskComp} alt='desk' /></button>
       <button className='lamp-btn'><img className='lamp' src={lamp} alt='lamp' /></button>
-      <button className='radio-btn'><img className='radio' src={radio} alt='radio' /></button>
+      <button className='radio-btn' onClick={handleRadioClick}><img className='radio' src={radio} alt='radio' /></button>
 
-      {showPuzzle1 && (
-        <Puzzle1 onClose={handleClosePuzzle1} />
+      {showPuzzleOne && (
+        <PuzzleOne onClose={handleClosePuzzleOne} />
+      )}
+
+      {showPuzzleTwo && (
+        <PuzzleTwo onClose={handleClosePuzzleTwo} />
       )}
     </article>
   );

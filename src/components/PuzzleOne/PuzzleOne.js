@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PuzzleOne.css'
 
-export default function Puzzle1({ onClose, onSubmit }) {
+export default function PuzzleOne({ onClose, onSubmit }) {
   const [answer, setAnswer] = useState('');
 
   const handleSubmit = () => {
