@@ -14,7 +14,6 @@ import radio from "../../assets/room/radio.png";
 import lamp from "../../assets/room/lamp.png";
 import deskComp from "../../assets/room/desk-comp.png";
 import bike from "../../assets/room/bike-front.png";
-
 export default function Room() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
@@ -22,59 +21,45 @@ export default function Room() {
   const [showPuzzleFour, setShowPuzzleFour] = useState(false);
   const [showPuzzleFive, setShowPuzzleFive] = useState(false);
   const [lampClicked, setLampClicked] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("blue");
-
+  const roomStyle = {
+    "--room-bg": lampClicked ? 'none' : `url(${blueBackground})`,
+  };
   const handleClockClick = () => {
     setShowPuzzleThree(true);
   };
-
   const handleClosePuzzleThree = () => {
     setShowPuzzleThree(false);
   };
-
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
   };
-
   const handleClosePuzzleOne = () => {
     setShowPuzzleOne(false);
   };
   const handleRadioClick = () => {
     setShowPuzzleTwo(true);
   };
-
   const handleClosePuzzleTwo = () => {
     setShowPuzzleTwo(false);
   };
-
   const handlePlantClick = () => {
     setShowPuzzleFour(true);
   };
-
   const handleClosePuzzleFour = () => {
     setShowPuzzleFour(false);
   };
-
   const handleBikeClick = () => {
     setShowPuzzleFive(true);
   };
-
   const handleClosePuzzleFive = () => {
     setShowPuzzleFive(false);
   };
-
   const handleLampClick = () => {
-    setBackgroundColor((prevColor) => (prevColor === "blue" ? "black" : "blue"));
     setLampClicked(!lampClicked);
   };
-
   return (
     <article
-      className={`room ${lampClicked ? "invert-colors" : ""}`}
-      style={{
-        backgroundColor: backgroundColor,
-        backgroundImage: `url(${blueBackground})`,
-      }}
+    className={`room ${lampClicked ? "invert-colors" : ""}`} style={roomStyle}
     >
       <button className="clock-btn" onClick={handleClockClick}>
         <img className="clock" src={clock} alt="clock" />
@@ -100,7 +85,6 @@ export default function Room() {
       <button className="radio-btn" onClick={handleRadioClick}>
         <img className="radio" src={radio} alt="radio" />
       </button>
-
       {showPuzzleOne && <PuzzleOne onClose={handleClosePuzzleOne} />}
       {showPuzzleTwo && <PuzzleTwo onClose={handleClosePuzzleTwo} />}
       {showPuzzleThree && <PuzzleThree onClose={handleClosePuzzleThree} />}
