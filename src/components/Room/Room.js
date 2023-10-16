@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PuzzleOne from "../PuzzleOne/PuzzleOne";
+import PuzzleThree from "../../PuzzleThree/PuzzleThree";
 import PuzzleTwo from "../PuzzleTwo/PuzzleTwo";
 import PuzzleFour from "../PuzzleFour/PuzzleFour";
+import PuzzleFive from "../PuzzleFive/PuzzleFive";
 import "./Room.css";
 import blueBackground from "../../assets/room/blue-bg.png";
 import clock from "../../assets/room/clock.png";
@@ -16,8 +18,9 @@ import bike from "../../assets/room/bike-front.png";
 export default function Room() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
-  const [showPuzzleFour, setShowPuzzleFour] = useState(false);
   const [showPuzzleThree, setShowPuzzleThree] = useState(false);
+  const [showPuzzleFour, setShowPuzzleFour] = useState(false);
+  const [showPuzzleFive, setShowPuzzleFive] = useState(false);
 
   const handleClockClick = () => {
     setShowPuzzleThree(true);
@@ -26,40 +29,49 @@ export default function Room() {
   const handleClosePuzzleThree = () => {
     setShowPuzzleThree(false);
   };
-  {showPuzzleThree && <PuzzleThree onClose={handleClosePuzzleThree} />}
 
+  
+  
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
   };
-
+  
   const handleClosePuzzleOne = () => {
     setShowPuzzleOne(false);
   };
   const handleRadioClick = () => {
     setShowPuzzleTwo(true);
   };
-
+  
   const handleClosePuzzleTwo = () => {
     setShowPuzzleTwo(false);
   };
-
+  
   const handlePlantClick = () => {
     setShowPuzzleFour(true);
   };
-
+  
   const handleClosePuzzleFour = () => {
     setShowPuzzleFour(false);
   };
-
+  
+  const handleBikeClick = () => {
+    setShowPuzzleFive(true);
+  };
+  
+  const handleClosePuzzleFive = () => {
+    setShowPuzzleFive(false);
+  };
+  
   return (
     <article className="room" style={{ "--room-bg": `url(${blueBackground})` }}>
-      <button className="clock-btn">
+      <button className="clock-btn" onClick={handleClockClick}> 
         <img className="clock" src={clock} alt="clock" />
       </button>
       <button className="plant-btn" onClick={handlePlantClick}>
         <img className="plant" src={plant} alt="plant" />
       </button>
-      <button className="bike-btn">
+      <button className="bike-btn" onClick={handleBikeClick}>
         <img className="bike" src={bike} alt="bike" />
       </button>
       <button className="door-btn">
@@ -82,7 +94,11 @@ export default function Room() {
 
       {showPuzzleTwo && <PuzzleTwo onClose={handleClosePuzzleTwo} />}
 
+      {showPuzzleThree && <PuzzleThree onClose={handleClosePuzzleThree} />}
+
       {showPuzzleFour && <PuzzleFour onClose={handleClosePuzzleFour} />}
+
+      {showPuzzleFive && <PuzzleFive onClose={handleClosePuzzleFive} />}
     </article>
   );
 }
