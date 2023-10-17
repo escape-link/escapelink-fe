@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Chat from '../Chat/Chat';
 import PuzzleOne from '../PuzzleOne/PuzzleOne';
 import PuzzleFour from '../PuzzleFour/PuzzleFour';
@@ -17,23 +17,6 @@ export default function Room() {
   const [gameStarted, setGameStarted] = useState(false);
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleFour, setShowPuzzleFour] = useState(false);
-
-  useEffect(() => {
-    // Set up an event listener for when the game starts
-    const handleGameStartEvent = (event) => {
-      if (event.detail.action === 'start_game') {
-        setGameStarted(true);
-      }
-    };
-
-    // Attach the listener to the document
-    document.addEventListener('gameStart', handleGameStartEvent);
-
-    return () => {
-      // Clean up the listener when the component is unmounted
-      document.removeEventListener('gameStart', handleGameStartEvent);
-    };
-  }, []);
 
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
@@ -56,6 +39,7 @@ export default function Room() {
       {!gameStarted ? (
         <div>
           Waiting for everyone to be ready...
+          <button onClick={() => setGameStarted(true)}>Everyone's here!</button>
         </div>
       ) : (
         <article className='room' style={{ '--room-bg': `url(${blueBackground})` }}>

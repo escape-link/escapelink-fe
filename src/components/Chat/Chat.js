@@ -19,24 +19,16 @@ export default function Chat() {
     }
 
     const cable = createConsumer(
-      // 'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
-      'ws://localhost:3000/cable'
+      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
     );
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: roomName },
       {
         received: (data) => {
-          console.log("Received from backend:", data);
-
-          // Check if the received data is a 'start_game' message
-          if (data.action && data.action === 'start_game') {
-            // TODO: Handle the game start event. You may want to redirect the user or update the UI.
-          } else {
-            setAllMessages((allMessages) => [
-              ...allMessages,
-              `${data.nickname}: ${data.message}`
-            ]);
-          }
+          setAllMessages((allMessages) => [
+            ...allMessages,
+            `${data.nickname}: ${data.message}`
+          ]);
         }
       }
     );
@@ -60,13 +52,6 @@ export default function Chat() {
   const handleNickname = () => {
     localStorage.setItem(`nickname_${roomName}`, nickname);
     setHasNickname(true);
-  };
-
-  const handleGameStart = () => {
-    // Send a start_game message to the backend
-    subscription.send({
-      action: 'start_game'
-    });
   };
 
   return (
@@ -97,7 +82,6 @@ export default function Chat() {
             onChange={(e) => setCurrentMessage(e.target.value)}
           />
           <button onClick={handleSubmitMessage}>Send</button>
-          <button onClick={handleGameStart}>Everyone's here!</button>
         </>
       )}
       <div>
@@ -105,6 +89,6 @@ export default function Chat() {
           <div key={idx}>{message}</div>
         ))}
       </div>
-    </div>
+        </div>
   );
 }
