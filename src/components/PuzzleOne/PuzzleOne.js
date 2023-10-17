@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './PuzzleOne.css'
 
-export default function PuzzleOne({ onClose, onSubmit }) {
-  const [answer, setAnswer] = useState('');
+export default function PuzzleOne({ onClose, winConditions, setWinConditions }) {
+  const [answer, setAnswer] = useState("");
 
   const handleSubmit = () => {
-    onSubmit(answer);
+    if (answer === "Portal") {
+      setWinConditions([...winConditions, answer]);
+    }
     onClose();
   };
 
