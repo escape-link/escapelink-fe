@@ -5,7 +5,7 @@ export default function PuzzleTwo({ onClose, winConditions, setWinConditions }) 
   const [answer, setAnswer] = useState("");
 
   const handleSubmit = () => {
-    if (answer === 94.5) {
+    if (answer === '94.5') {
       setWinConditions([...winConditions, answer])
     }
     onClose();
