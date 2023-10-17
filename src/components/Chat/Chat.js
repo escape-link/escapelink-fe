@@ -19,8 +19,7 @@ export default function Chat() {
     }
 
     const cable = createConsumer(
-      // 'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
-      'ws://localhost:3000/cable'
+      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
     );
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: roomName },
