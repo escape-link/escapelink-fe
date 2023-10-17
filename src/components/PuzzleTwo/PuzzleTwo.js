@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './PuzzleTwo.css';
 
-export default function PuzzleTwo({ onClose, onSubmit }) {
-  const [answer, setAnswer] = useState('');
+export default function PuzzleTwo({ onClose, winConditions, setWinConditions }) {
+  const [answer, setAnswer] = useState("");
 
   const handleSubmit = () => {
-    onSubmit(answer);
+    if (answer === 94.5) {
+      setWinConditions([...winConditions, answer])
+    }
     onClose();
   };
 
