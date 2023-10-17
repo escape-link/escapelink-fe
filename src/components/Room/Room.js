@@ -21,6 +21,9 @@ export default function Room() {
   const [showPuzzleFour, setShowPuzzleFour] = useState(false);
   const [showPuzzleFive, setShowPuzzleFive] = useState(false);
   const [lampClicked, setLampClicked] = useState(false);
+  const [winConditions, setWinConditions] = useState([]);
+  console.log(winConditions)
+
   const roomStyle = {
     "--room-bg": lampClicked ? 'none' : `url(${blueBackground})`,
   };
@@ -85,11 +88,11 @@ export default function Room() {
       <button className="radio-btn" onClick={handleRadioClick}>
         <img className="radio" src={radio} alt="radio" />
       </button>
-      {showPuzzleOne && <PuzzleOne onClose={handleClosePuzzleOne} />}
-      {showPuzzleTwo && <PuzzleTwo onClose={handleClosePuzzleTwo} />}
-      {showPuzzleThree && <PuzzleThree onClose={handleClosePuzzleThree} />}
-      {showPuzzleFour && <PuzzleFour onClose={handleClosePuzzleFour} />}
-      {showPuzzleFive && <PuzzleFive onClose={handleClosePuzzleFive} />}
+      {showPuzzleOne && <PuzzleOne winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
+      {showPuzzleTwo && <PuzzleTwo winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleTwo} />}
+      {showPuzzleThree && <PuzzleThree winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
+      {showPuzzleFour && <PuzzleFour winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
+      {showPuzzleFive && <PuzzleFive winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFive} />}
     </article>
   );
 }
