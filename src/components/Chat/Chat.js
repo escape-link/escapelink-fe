@@ -33,12 +33,12 @@ export default function Chat() {
       }
     );
 
-    setSubscription(newSubscription)
+    setSubscription(newSubscription);
 
     return () => {
-      cable.disconnect()
-      newSubscription.unsubscribe()
-    }
+      cable.disconnect();
+      newSubscription.unsubscribe();
+    };
   }, [roomName]);
 
   const handleSubmitMessage = (e) => {
@@ -58,7 +58,7 @@ export default function Chat() {
     <div>
       {!hasNickname ? (
         <div>
-          <label htmlFor="nickname" />
+          <label htmlFor="nickname">Nickname:</label>
           <input
             id="nickname"
             name="nickname"
@@ -70,22 +70,25 @@ export default function Chat() {
           <button onClick={handleNickname}>Enter</button>
         </div>
       ) : (
-        <div>
-          <p>Greetings {nickname}</p>
-          <label htmlFor="currentMessage" />
+        <>
+          <div>Hello, {nickname}!</div>
           <textarea
             id="currentMessage"
             name="currentMessage"
-            placeholder="Enter message here"
+            placeholder="Enter message here..."
             rows="4"
             cols="33"
             value={currentMessage}
             onChange={(e) => setCurrentMessage(e.target.value)}
           />
           <button onClick={handleSubmitMessage}>Send</button>
-        </div>
+        </>
       )}
-      <p>{allMessages}</p>
-    </div>
+      <div>
+        {allMessages.map((message, idx) => (
+          <div key={idx}>{message}</div>
+        ))}
+      </div>
+        </div>
   );
 }
