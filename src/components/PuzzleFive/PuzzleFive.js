@@ -4,7 +4,8 @@ import './PuzzleFive.css'
 export default function PuzzleFive ({   
   onClose,
   winConditions,
-  setWinConditions
+  setWinConditions,
+  setIsDisabled
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -15,9 +16,10 @@ export default function PuzzleFive ({
   }
 
   const handleSubmit = () => {
-    if (answer.toLowerCase() === 'Will Smith') {
+    if (answer.toLowerCase() === 'will smith') {
       setWinConditions([...winConditions, answer]);
       onClose();
+      setIsDisabled(true);
     } else {
       setIncorrect('Incorrect: Please try again');
     }

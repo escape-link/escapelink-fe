@@ -19,7 +19,7 @@ export default function PuzzleOne({
     if (answer.toLowerCase() === 'portal') {
       setWinConditions([...winConditions, answer]);
       onClose();
-      setIsDisabled(true)
+      setIsDisabled(true);
     } else {
       setIncorrect('Incorrect: Please try again');
     }

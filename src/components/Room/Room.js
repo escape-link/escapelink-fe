@@ -36,6 +36,8 @@ export default function Room() {
   }
 
 console.log('2',isDisabled.puzzleTwo)
+console.log('3',isDisabled.puzzleThree)
+
   const roomStyle = {
     "--room-bg": lampClicked ? 'none' : `url(${blueBackground})`,
   };
@@ -81,10 +83,10 @@ console.log('2',isDisabled.puzzleTwo)
       <button className={`clock-btn ${isDisabled.puzzleThree ? 'disabled': 'active'}`} onClick={handleClockClick}>
         <img className="clock" src={clock} alt="clock" />
       </button>
-      <button className="plant-btn" onClick={handlePlantClick}>
+      <button className={`plant-btn ${isDisabled.puzzleFour ? 'disabled': 'active'}`}  onClick={handlePlantClick}>
         <img className="plant" src={plant} alt="plant" />
       </button>
-      <button className="bike-btn" onClick={handleBikeClick}>
+      <button className={`bike-btn ${isDisabled.puzzleFive ? 'disabled': 'active'}`}  onClick={handleBikeClick}>
         <img className="bike" src={bike} alt="bike" />
       </button>
       <button className="door-btn">
@@ -104,9 +106,9 @@ console.log('2',isDisabled.puzzleTwo)
       </button>
       {showPuzzleOne && <PuzzleOne isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleOne', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
       {showPuzzleTwo && <PuzzleTwo isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleTwo', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleTwo} />}
-      {showPuzzleThree && <PuzzleThree winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
-      {showPuzzleFour && <PuzzleFour winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
-      {showPuzzleFive && <PuzzleFive winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFive} />}
+      {showPuzzleThree && <PuzzleThree isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleThree', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
+      {showPuzzleFour && <PuzzleFour isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleFour', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
+      {showPuzzleFive && <PuzzleFive isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleFive', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFive} />}
     </article>
   );
 }
