@@ -15,7 +15,7 @@ export default function PuzzleFive ({
   }
 
   const handleSubmit = () => {
-    if (answer.toLowerCase() === 'Will Smith') {
+    if (answer.toLowerCase() === 'will smith') {
       setWinConditions([...winConditions, answer]);
       onClose();
     } else {
