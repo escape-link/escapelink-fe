@@ -14,6 +14,7 @@ import radio from "../../assets/room/radio.png";
 import lamp from "../../assets/room/lamp.png";
 import deskComp from "../../assets/room/desk-comp.png";
 import bike from "../../assets/room/bike-front.png";
+
 export default function Room() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
@@ -22,7 +23,18 @@ export default function Room() {
   const [showPuzzleFive, setShowPuzzleFive] = useState(false);
   const [lampClicked, setLampClicked] = useState(false);
   const [winConditions, setWinConditions] = useState([]);
-  console.log(winConditions)
+  const [isDisabled, setIsDisabled] = useState({
+    puzzleOne: false,
+    puzzleTwo: false,
+    puzzleThree: false,
+    puzzleFour: false,
+    puzzleFive: false
+  })
+
+  const setPuzzleState = (puzzleNum, isDisabled) => {
+    setIsDisabled ({...puzzleNum,[puzzleNum]: isDisabled })
+  }
+
 
   const roomStyle = {
     "--room-bg": lampClicked ? 'none' : `url(${blueBackground})`,
@@ -33,6 +45,7 @@ export default function Room() {
   const handleClosePuzzleThree = () => {
     setShowPuzzleThree(false);
   };
+
   const handleDeskCompClick = () => {
     setShowPuzzleOne(true);
   };
@@ -60,11 +73,12 @@ export default function Room() {
   const handleLampClick = () => {
     setLampClicked(!lampClicked);
   };
+
   return (
     <article
     className={`room ${lampClicked ? "invert-colors" : ""}`} style={roomStyle}
     >
-      <button className="clock-btn" onClick={handleClockClick}>
+      <button className={`clock-btn ${isDisabled.puzzleThree ? 'disabled': 'active'}`} onClick={handleClockClick}>
         <img className="clock" src={clock} alt="clock" />
       </button>
       <button className="plant-btn" onClick={handlePlantClick}>
@@ -79,7 +93,7 @@ export default function Room() {
       <button className="board-btn">
         <img className="board" src={board} alt="board" />
       </button>
-      <button className="desk-comp-btn" onClick={handleDeskCompClick}>
+      <button className={`desk-comp-btn ${isDisabled.puzzleOne ? 'disabled': 'active'}`} onClick={handleDeskCompClick}>
         <img className="desk-comp" src={deskComp} alt="desk" />
       </button>
       <button className="lamp-btn" onClick={handleLampClick}>
@@ -88,7 +102,7 @@ export default function Room() {
       <button className="radio-btn" onClick={handleRadioClick}>
         <img className="radio" src={radio} alt="radio" />
       </button>
-      {showPuzzleOne && <PuzzleOne winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
+      {showPuzzleOne && <PuzzleOne isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleOne', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
       {showPuzzleTwo && <PuzzleTwo winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleTwo} />}
       {showPuzzleThree && <PuzzleThree winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
       {showPuzzleFour && <PuzzleFour winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
