@@ -9,6 +9,10 @@ export default function PuzzleThree({
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
 
+  const handleChange = (e) => {
+    setIncorrect('')
+    setAnswer(e.target.value)
+  }
 
   const handleSubmit = () => {
     if (answer === 'alien') {
@@ -31,7 +35,7 @@ export default function PuzzleThree({
       <input
         type="text"
         value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
+        onChange={handleChange}
         placeholder="Enter answer"
       />
       <button onClick={handleSubmit}>Submit</button>
