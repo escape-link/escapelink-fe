@@ -15,7 +15,7 @@ export default function PuzzleFour ({
   }
 
   const handleSubmit = () => {
-    if (answer === ('Alpha Centauri').toLowerCase()) {
+    if (answer.toLowerCase() === 'alpha centauri') {
       setWinConditions([...winConditions, answer]);
       onClose();
     } else {

@@ -15,7 +15,7 @@ export default function PuzzleThree({
   }
 
   const handleSubmit = () => {
-    if (answer === 'alien') {
+    if (answer.toLowerCase() === 'alien') {
       setWinConditions([...winConditions, answer]);
       onClose();
     } else {
