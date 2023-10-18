@@ -19,7 +19,7 @@ export default function PuzzleTwo({
     if (answer === '94.5') {
       setWinConditions([...winConditions, answer]);
       onClose();
-      setIsDisabled(true)
+      setIsDisabled()
     } else {
       setIncorrect('Incorrect: Please try again');
     }

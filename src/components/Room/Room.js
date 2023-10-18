@@ -32,12 +32,9 @@ export default function Room() {
   })
   console.log(winConditions)
 
-  const setPuzzleState = (puzzleNum, isDisabled) => {
-    setIsDisabled ({...puzzleNum,[puzzleNum]: isDisabled })
+  const setPuzzleState = (puzzleNum) => {
+    setIsDisabled (prevIsDisabled => ({...prevIsDisabled,[puzzleNum]: true }))
   }
-
-console.log('2',isDisabled.puzzleTwo)
-console.log('3',isDisabled.puzzleThree)
 
   const roomStyle = {
     "--room-bg": lampClicked ? 'none' : `url(${blueBackground})`,
@@ -105,11 +102,11 @@ console.log('3',isDisabled.puzzleThree)
       <button className={`radio-btn ${isDisabled.puzzleTwo ? 'disabled': 'active'}`} onClick={handleRadioClick}>
         <img className="radio" src={radio} alt="radio" />
       </button>
-      {showPuzzleOne && <PuzzleOne isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleOne', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
-      {showPuzzleTwo && <PuzzleTwo isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleTwo', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleTwo} />}
-      {showPuzzleThree && <PuzzleThree isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleThree', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
-      {showPuzzleFour && <PuzzleFour isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleFour', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
-      {showPuzzleFive && <PuzzleFive isDisabled={isDisabled} setIsDisabled={(isDisabled) => setPuzzleState('puzzleFive', isDisabled)} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFive} />}
+      {showPuzzleOne && <PuzzleOne  setIsDisabled={() => setPuzzleState('puzzleOne')} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleOne} />}
+      {showPuzzleTwo && <PuzzleTwo setIsDisabled={() => setPuzzleState( 'puzzleTwo')} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleTwo} />}
+      {showPuzzleThree && <PuzzleThree setIsDisabled={() => setPuzzleState( 'puzzleThree')} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleThree} />}
+      {showPuzzleFour && <PuzzleFour  setIsDisabled={() => setPuzzleState('puzzleFour')} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFour} />}
+      {showPuzzleFive && <PuzzleFive setIsDisabled={() => setPuzzleState( 'puzzleFive')} winConditions={winConditions} setWinConditions={setWinConditions} onClose={handleClosePuzzleFive} />}
     </article>
   );
 }

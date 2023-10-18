@@ -61,12 +61,6 @@
   pointer-events: none;
 }
 
-/* .clock-btn.disabled:hover,
-.desk-comp-btn.disabled:hover {
-  background-color: transparent;
-  border: none;
-} */
-
 .plant-btn {
   grid-area: plant;
   display: flex;

@@ -19,7 +19,7 @@ export default function PuzzleThree({
     if (answer.toLowerCase() === 'aliens') {
       setWinConditions([...winConditions, answer]);
       onClose();
-      setIsDisabled(true)
+      setIsDisabled()
     } else {
       setIncorrect('Incorrect: Please try again');
     }
