@@ -30,6 +30,7 @@ export default function Room() {
     puzzleFour: false,
     puzzleFive: false
   })
+  console.log(winConditions)
 
   const setPuzzleState = (puzzleNum, isDisabled) => {
     setIsDisabled ({...puzzleNum,[puzzleNum]: isDisabled })
