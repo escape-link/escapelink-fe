@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { createConsumer } from '@rails/actioncable';
 import { useParams } from 'react-router-dom';
 
-export default function Chat() {
+export default function Chat({ onAllUsersReady }) {
   const [nickname, setNickname] = useState('');
   const [currentMessage, setCurrentMessage] = useState('');
   const [allMessages, setAllMessages] = useState([]);
@@ -18,18 +18,19 @@ export default function Chat() {
       setHasNickname(true);
     }
 
-    const cable = createConsumer(
-      // 'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
-      'ws://localhost:3000/cable'
-    );
+    const cable = createConsumer('ws://localhost:3000/cable');
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: roomName },
       {
         received: (data) => {
-          setAllMessages((allMessages) => [
-            ...allMessages,
-            `${data.nickname}: ${data.message}`
-          ]);
+          if (data.action === 'start_game') {
+            onAllUsersReady();
+          } else {
+            setAllMessages((allMessages) => [
+              ...allMessages,
+              `${data.nickname}: ${data.message}`
+            ]);
+          }
         }
       }
     );
@@ -43,6 +44,7 @@ export default function Chat() {
   }, [roomName]);
 
   const handleSubmitMessage = (e) => {
+    e.preventDefault(); // Prevent default form submission
     subscription.send({
       nickname: nickname,
       message: currentMessage
@@ -71,25 +73,22 @@ export default function Chat() {
           <button onClick={handleNickname}>Enter</button>
         </div>
       ) : (
-        <>
-          <div>Hello, {nickname}!</div>
-          <textarea
-            id="currentMessage"
-            name="currentMessage"
-            placeholder="Enter message here..."
-            rows="4"
-            cols="33"
-            value={currentMessage}
-            onChange={(e) => setCurrentMessage(e.target.value)}
-          />
-          <button onClick={handleSubmitMessage}>Send</button>
-        </>
-      )}
-      <div>
-        {allMessages.map((message, idx) => (
-          <div key={idx}>{message}</div>
-        ))}
-      </div>
+        <div className="chat-container">
+          <div className="chat-window">
+            {allMessages.map((message, index) => (
+              <div key={index}>{message}</div>
+            ))}
+          </div>
+          <form onSubmit={handleSubmitMessage}>
+            <input
+              type="text"
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+            />
+            <button type="submit">Send</button>
+          </form>
         </div>
+      )}
+    </div>
   );
 }
