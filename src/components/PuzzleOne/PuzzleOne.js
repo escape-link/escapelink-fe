@@ -4,10 +4,11 @@ import './PuzzleOne.css'
 export default function PuzzleOne({   
   onClose,
   winConditions,
-  setWinConditions
+  setWinConditions,
+  setIsDisabled
 }) {
   const [answer, setAnswer] = useState('');
-  const [incorrect, setIncorrect] = useState('');
+  const [incorrect, setIncorrect] = useState('');  
 
   const handleChange = (e) => {
     setIncorrect('')
@@ -18,6 +19,7 @@ export default function PuzzleOne({
     if (answer.toLowerCase() === 'portal') {
       setWinConditions([...winConditions, answer]);
       onClose();
+      setIsDisabled(true)
     } else {
       setIncorrect('Incorrect: Please try again');
     }
