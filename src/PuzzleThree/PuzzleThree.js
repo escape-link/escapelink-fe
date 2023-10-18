@@ -30,9 +30,9 @@ export default function PuzzleThree({
       <p>{incorrect}</p>
       <h2>Riddle</h2>
       <p>
-        "I come from a place beyond the stars, With shiny ships that blink near
-        and far. You've seen me in movies, books, and more, Do you know what I
-        am, or are you unsure?"
+        "We come from a place beyond the stars, With shiny ships that blink near
+        and far. You've seen us in movies, books, and more, Do you know what we
+        are, or are you unsure?"
       </p>
       <input
         type="text"
