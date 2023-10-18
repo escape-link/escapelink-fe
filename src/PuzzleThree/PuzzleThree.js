@@ -15,7 +15,7 @@ export default function PuzzleThree({
   }
 
   const handleSubmit = () => {
-    if (answer.toLowerCase() === 'alien') {
+    if (answer.toLowerCase() === 'aliens') {
       setWinConditions([...winConditions, answer]);
       onClose();
     } else {
@@ -28,8 +28,8 @@ export default function PuzzleThree({
       <p>{incorrect}</p>
       <h2>Riddle</h2>
       <p>
-        "I come from a place beyond the stars, With shiny ships that blink near
-        and far. You've seen me in movies, books, and more, Do you know what I
+        "We come from a place beyond the stars, With shiny ships that blink near
+        and far. You've seen us in movies, books, and more, Do you know what I
         am, or are you unsure?"
       </p>
       <input
