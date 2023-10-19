@@ -4,7 +4,8 @@ import './PuzzleTwo.css';
 export default function PuzzleTwo({
   onClose,
   winConditions,
-  setWinConditions
+  setWinConditions,
+  setIsDisabled
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -18,10 +19,12 @@ export default function PuzzleTwo({
     if (answer === '94.5') {
       setWinConditions([...winConditions, answer]);
       onClose();
+      setIsDisabled()
     } else {
       setIncorrect('Incorrect: Please try again');
     }
   };
+
 
   return (
     <div className="popup">
