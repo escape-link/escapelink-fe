@@ -39,6 +39,7 @@
 .radio-btn:hover,
 .lamp-btn:hover {
   transform: scale(0.95);
+  cursor: pointer;
 }
 
 .clock-btn {
@@ -47,17 +48,17 @@
 }
 
 .clock-btn.disabled,
-.desk-comp-btn.disabled {
+.desk-comp-btn.disabled,
+.plant-btn.disabled,
+.door-btn.disabled,
+.bike-btn.disabled,
+.board-btn.disabled,
+.radio-btn.disabled,
+.lamp-btn.disabled {
   /* cursor: not-allowed !important; */
   filter: invert(50%);
   transform: scale(1);
   pointer-events: none;
-}
-
-.clock-btn.disabled:hover,
-.desk-comp-btn.disabled:hover {
-  background-color: transparent;
-  border: none;
 }
 
 .plant-btn {

@@ -4,7 +4,8 @@ import './PuzzleFour.css'
 export default function PuzzleFour ({   
   onClose,
   winConditions,
-  setWinConditions
+  setWinConditions,
+  setIsDisabled
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -18,6 +19,7 @@ export default function PuzzleFour ({
     if (answer.toLowerCase() === 'alpha centauri') {
       setWinConditions([...winConditions, answer]);
       onClose();
+      setIsDisabled(true);
     } else {
       setIncorrect('Incorrect: Please try again');
     }
