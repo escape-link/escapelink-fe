@@ -2,8 +2,9 @@ import './App.css';
 import Header from './components/Header/Header';
 import Story from './components/Story/Story';
 import { Route, Routes } from 'react-router-dom'
-import Room from './components/Room/Room'
+import Room from './components/RoomOne/RoomOne'
 import Chat from './components/Chat/Chat';
+import LandingPage from './components/LandingPage/LandingPage';
 
 function App() {
   return (
@@ -12,10 +13,11 @@ function App() {
         <Route path='/' element = {
           <>
           <Header />
-          <Story />
+          <LandingPage />
           </>
           } 
           />
+          <Route path='/roomID' element={<Story/>}/>
            <Route path='/room/:roomName' element={
         <>
           <Room />
