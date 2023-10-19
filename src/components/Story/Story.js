@@ -8,12 +8,15 @@ export default function Story() {
 
   const startGame = async () => {
     try {
-      const roomName = await fetchGameLink();
-      navigate(`/room/${roomName.room_name}`);
+      const roomId = 1; // Replace this with the actual room_id you get from your system
+
+      const gameData = await fetchGameLink(roomId); // Pass roomId as argument
+      navigate(`/room/${gameData.game_name}`); // Navigate using game_name
     } catch (err) {
       console.log(`${err.message}`);
     }
   };
+
 
   return (
     <section className='landing-page-body' style={{ '--background': `url(${background})` }}>
