@@ -29,10 +29,8 @@ export default function PuzzleTwo({
   return (
     <div className="popup">
       <p>{incorrect}</p>
-      <h2>Radio Frequency Puzzle</h2>
-      <p>
-        Decode the radio frequency: what station should you tune in to? The
-        first digit of the radio station is the second digit of the year of the
+      <h2>Radio Frequency: Tune to the correct station.</h2>
+      <p>The first digit of the radio station is the second digit of the year of the
         year area 51 was founded. The second is the only number whose English
         name has the same number of letters as its value. For the last digit,
         which follows a decimal point, look for the Leo constellation and figure
