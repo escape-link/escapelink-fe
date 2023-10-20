@@ -16,6 +16,7 @@ import deskComp from "../../assets/room/desk-comp.png";
 import bike from "../../assets/room/bike-front.png";
 import VictoryPage from "../VictoryPage/VictoryPage";
 import RoomHeader from "../RoomHeader/RoomHeader";
+import Cipher from "../Cipher/Cipher";
 
 export default function RoomOne() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
@@ -33,6 +34,11 @@ export default function RoomOne() {
     puzzleFive: false,
   });
   const [showVictoryPage, setShowVictoryPage] = useState(false);
+  const [isCipherVisible, setIsCipherVisible] = useState(false);
+
+  const toggleCipherVisibility = () => {
+    setIsCipherVisible(!isCipherVisible);
+  };
 
   useEffect(() => {
     if (winConditions.length === 5) {
@@ -98,6 +104,7 @@ export default function RoomOne() {
               isDisabled.puzzleThree ? "disabled" : "active"
             }`}
             onClick={handleClockClick}
+            tabIndex={isDisabled.puzzleThree ? -1 : 0}
           >
             <img className="clock" src={clock} alt="clock" />
           </button>
@@ -106,6 +113,7 @@ export default function RoomOne() {
               isDisabled.puzzleFour ? "disabled" : "active"
             }`}
             onClick={handlePlantClick}
+            tabIndex={isDisabled.puzzleFour ? -1 : 0}
           >
             <img className="plant" src={plant} alt="plant" />
           </button>
@@ -114,13 +122,21 @@ export default function RoomOne() {
               isDisabled.puzzleFive ? "disabled" : "active"
             }`}
             onClick={handleBikeClick}
+            tabIndex={isDisabled.puzzleFive ? -1 : 0}
           >
             <img className="bike" src={bike} alt="bike" />
           </button>
-          <button className="door-btn">
+          <button
+            className="door-btn"
+            tabIndex={0}
+          >
             <img className="door" src={door} alt="door" />
           </button>
-          <button className="board-btn">
+          <button
+            className="board-btn"
+            onClick={toggleCipherVisibility}
+            tabIndex={isCipherVisible ? 0 : -1}
+          >
             <img className="board" src={board} alt="board" />
           </button>
           <button
@@ -128,10 +144,15 @@ export default function RoomOne() {
               isDisabled.puzzleOne ? "disabled" : "active"
             }`}
             onClick={handleDeskCompClick}
+            tabIndex={isDisabled.puzzleOne ? -1 : 0}
           >
             <img className="desk-comp" src={deskComp} alt="desk" />
           </button>
-          <button className="lamp-btn" onClick={handleLampClick}>
+          <button
+            className="lamp-btn"
+            onClick={handleLampClick}
+            tabIndex={0}
+          >
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
           <button
@@ -139,6 +160,7 @@ export default function RoomOne() {
               isDisabled.puzzleTwo ? "disabled" : "active"
             }`}
             onClick={handleRadioClick}
+            tabIndex={isDisabled.puzzleTwo ? -1 : 0}
           >
             <img className="radio" src={radio} alt="radio" />
           </button>
@@ -184,6 +206,8 @@ export default function RoomOne() {
           )}
         </article>
       )}
+
+      {isCipherVisible && <Cipher onClose={toggleCipherVisibility} />}
     </div>
   );
 }
