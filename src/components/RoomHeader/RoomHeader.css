@@ -1,0 +1,25 @@
+.room-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c0c4d7;
+    width: 100vw;
+    padding: 1em 0em;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #bfd7df 5%, #1829de 100%);
+    gap: 2em;
+    box-shadow: inset -2px -17px 20px 1px rgb(125 150 156);
+    }
+    
+    h1 {
+      font-size: 3em;
+    }
+    
+    .alien{
+      width: 7em;
+      margin: -1.5em 
+    }
+  
+    .timer-btn {
+      margin: 0
+    }
