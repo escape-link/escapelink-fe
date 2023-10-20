@@ -144,7 +144,7 @@ export default function RoomOne() {
               isDisabled.puzzleOne ? "disabled" : "active"
             }`}
             onClick={handleDeskCompClick}
-            tabIndex={isDisabled.puzzleOne ? -1 : 0}
+            tabIndex={0}
           >
             <img className="desk-comp" src={deskComp} alt="desk" />
           </button>
