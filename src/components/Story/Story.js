@@ -1,15 +1,16 @@
 import './Story.css';
 import background from '../../assets/big-donut.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import fetchGameLink from '../../apiCalls';
 
 export default function Story() {
   const navigate = useNavigate();
+  const { displayedRoomName } = useParams(); // Getting the room name from the URL
 
   const startGame = async () => {
     try {
-      const gameName = await fetchGameLink();
-      navigate(`/room/${gameName.game_name}`);
+      const gameData = await fetchGameLink();
+      navigate(`/${displayedRoomName}/${gameData.game_name}`);
     } catch (err) {
       console.log(`${err.message}`);
     }
