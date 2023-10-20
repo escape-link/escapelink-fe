@@ -73,20 +73,8 @@ export default function Chat() {
       ) : (
         <div>
           <p>Greetings {nickname}</p>
-          <label htmlFor="currentMessage" />
-          <textarea
-            id="currentMessage"
-            name="currentMessage"
-            placeholder="Enter message here"
-            rows="4"
-            cols="33"
-            value={currentMessage}
-            onChange={(e) => setCurrentMessage(e.target.value)}
-          />
-          <button onClick={handleSubmitMessage}>Send</button>
         </div>
       )}
-      <p>{allMessages}</p>
     </div>
   );
 }
