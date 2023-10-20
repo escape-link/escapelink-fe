@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import './PuzzleThree.css';
 
@@ -45,3 +46,10 @@ export default function PuzzleThree({
     </div>
   );
 }
+
+PuzzleThree.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired,
+};
