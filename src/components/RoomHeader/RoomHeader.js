@@ -4,21 +4,14 @@ import alien from "../../assets/alien.png";
 
 export default function RoomHeader() {
   const [timer, setTimer] = useState(0);
-  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    let interval;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer + 0.01);
-      }, 10);
-    } else {
-      clearInterval(interval);
-    }
+    const interval = setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 0.01);
+    }, 10);
 
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, []);
 
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
@@ -33,4 +26,5 @@ export default function RoomHeader() {
     </header>
   );
 }
+
 
