@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import RoomOne from './components/RoomOne/RoomOne';
 import ErrorHandling from './components/ErrorHandling/ErrorHandling';
-import { useState } from 'react';
 
 function App() {
   return (
