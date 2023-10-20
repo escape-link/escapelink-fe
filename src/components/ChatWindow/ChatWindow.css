@@ -1,0 +1,10 @@
+.messages-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 15rem;
+  height: 20rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  flex-direction: column;
+}
