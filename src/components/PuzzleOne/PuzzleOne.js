@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import './PuzzleOne.css'
+import './PuzzleOne.css';
 
 export default function PuzzleOne({   
   onClose,
@@ -24,6 +25,7 @@ export default function PuzzleOne({
       setIncorrect('Incorrect: Please try again');
     }
   };
+
   return (
     <div className="popup">
       <p>{incorrect}</p>
@@ -40,3 +42,10 @@ export default function PuzzleOne({
     </div>
   );
 }
+
+PuzzleOne.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired,
+};
