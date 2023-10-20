@@ -6,22 +6,25 @@ import Chat from './components/Chat/Chat';
 import LandingPage from './components/LandingPage/LandingPage';
 import RoomOne from './components/RoomOne/RoomOne';
 import RoomHeader from './components/RoomHeader/RoomHeader';
+// import { WebSocketContextProvider } from './components/Context/WebSocketContext';
 
 function App() {
   return (
-    <div>
-      <Routes>
-        {/* Single route for the landing page */}
-        <Route path='/' element={<><Header /><LandingPage /></>} />
 
-        {/* Route when only the room name is present in the URL */}
-        <Route path='/:displayedRoomName' element={<><Header /><Story /></>} />
+      <div>
+        <Routes>
+          {/* Single route for the landing page */}
+          <Route path='/' element={<><Header /><LandingPage /></>} />
+  
+          {/* Route when only the room name is present in the URL */}
+          <Route path='/:displayedRoomName' element={<><Header /><Story /></>} />
+  
+          {/* New route to capture data sent by the backend */}
+          <Route path='/:displayedRoomName/:backendData' element={<RoomOne />} />
+        </Routes>
+      </div>
 
-        {/* New route to capture data sent by the backend */}
-        <Route path='/:displayedRoomName/:backendData' element={<><RoomOne /><Chat /></>} />
-      </Routes>
-    </div>
-  );
+    );
 }
 
 export default App;
