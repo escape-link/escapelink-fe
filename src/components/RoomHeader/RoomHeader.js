@@ -24,8 +24,8 @@ export default function RoomHeader() {
   const seconds = timer % 60;
 
   return (
-    <header>
-      <h1>Escape Link</h1>
+    <header className="room-header">
+      <h1>Operation: Find Bob!!!</h1>
       <img className="alien" src={alien} alt="alien" />
       <p>
         Time Elapsed: {minutes}:{seconds.toFixed(2).padStart(5, "0")}
