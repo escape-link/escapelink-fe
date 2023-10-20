@@ -4,7 +4,7 @@ import alien from "../../assets/alien.png";
 
 export default function RoomHeader() {
   const [timer, setTimer] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     let interval;
@@ -20,22 +20,17 @@ export default function RoomHeader() {
     return () => clearInterval(interval);
   }, [isActive]);
 
-  const startTimer = () => {
-    setIsActive(!isActive);
-  };
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
 
   return (
     <header>
       <h1>Escape Link</h1>
       <img className="alien" src={alien} alt="alien" />
-      <button onClick={startTimer}>
-        {isActive ? "Stop Timer" : "Start Timer"}
-      </button>
       <p>
-        Time Elapsed: {timer.toFixed(2)} seconds
+        Time Elapsed: {minutes}:{seconds.toFixed(2).padStart(5, "0")}
       </p>
     </header>
   );
 }
-
 
