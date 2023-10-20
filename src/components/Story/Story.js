@@ -13,7 +13,7 @@ export default function Story() {
   const startGame = async () => {
     try {
       const gameData = await fetchGameLink();
-      navigate(`/${displayedRoomName}/${gameData.game_name}`);
+      navigate(`alienRoom/${displayedRoomName}/${gameData.game_name}`);
     } catch (err) {
       console.log(`${err.message}`);
     }
