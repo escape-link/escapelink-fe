@@ -1,5 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import "./Cipher.css";
-import "../../assets/room/Cipher.png";
 
 export default function Cipher({ onClose }) {
   return (
@@ -17,3 +18,7 @@ export default function Cipher({ onClose }) {
     </div>
   );
 }
+
+Cipher.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
