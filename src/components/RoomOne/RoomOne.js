@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import PuzzleOne from "../PuzzleOne/PuzzleOne";
 import PuzzleThree from "../../PuzzleThree/PuzzleThree";
 import PuzzleTwo from "../PuzzleTwo/PuzzleTwo";
@@ -18,14 +19,10 @@ import VictoryPage from "../VictoryPage/VictoryPage";
 import RoomHeader from "../RoomHeader/RoomHeader";
 import Cipher from "../Cipher/Cipher";
 import Chat from "../Chat/Chat";
-// import { useLocation } from "react-router-dom";
 import { createConsumer } from "@rails/actioncable";
 import { useParams } from "react-router-dom";
 
 export default function RoomOne() {
-  // const location= useLocation();
-  // const allMessages = location.state.allMessages;
-  // const subscription = location.state.subscription;
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
   const [showPuzzleThree, setShowPuzzleThree] = useState(false);
@@ -50,27 +47,27 @@ export default function RoomOne() {
     setIsCipherVisible(!isCipherVisible);
   };
 
-
   useEffect(() => {
     const cable = createConsumer(
-      // 'ws://localhost:3000/cable'
       'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
-      )
+    );
     const newSubscription = cable.subscriptions.create(
-      {channel: 'GameChannel', room: gameName},
+      { channel: "GameChannel", room: gameName },
       {
-        received: data => {
-          setAllMessages(allMessages => [...allMessages,`${data.nickname}: ${data.message}`])
-        }
+        received: (data) => {
+          setAllMessages((allMessages) => [
+            ...allMessages,
+            `${data.nickname}: ${data.message}`,
+          ]);
+        },
       }
-    )
-    setSubscription(newSubscription)
+    );
+    setSubscription(newSubscription);
     return () => {
-      cable.disconnect()
-      newSubscription.unsubscribe()
-    }
-  }, [gameName])
-
+      cable.disconnect();
+      newSubscription.unsubscribe();
+    };
+  }, [gameName]);
 
   useEffect(() => {
     if (winConditions.length === 5) {
@@ -158,10 +155,7 @@ export default function RoomOne() {
           >
             <img className="bike" src={bike} alt="bike" />
           </button>
-          <button
-            className="door-btn"
-            tabIndex={0}
-          >
+          <button className="door-btn" tabIndex={0}>
             <img className="door" src={door} alt="door" />
           </button>
           <button
@@ -180,11 +174,7 @@ export default function RoomOne() {
           >
             <img className="desk-comp" src={deskComp} alt="desk" />
           </button>
-          <button
-            className="lamp-btn"
-            onClick={handleLampClick}
-            tabIndex={0}
-          >
+          <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
           <button
@@ -236,7 +226,7 @@ export default function RoomOne() {
               onClose={handleClosePuzzleFive}
             />
           )}
-          <Chat gameName={gameName} allMessages={allMessages} subscription={subscription}/>
+          <Chat gameName={gameName} allMessages={allMessages} subscription={subscription} />
         </article>
       )}
 
@@ -244,3 +234,42 @@ export default function RoomOne() {
     </div>
   );
 }
+
+RoomOne.propTypes = {
+  gameName: PropTypes.string.isRequired,
+};
+
+PuzzleOne.propTypes = {
+  setIsDisabled: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+PuzzleTwo.propTypes = {
+  setIsDisabled: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+PuzzleThree.propTypes = {
+  setIsDisabled: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+PuzzleFour.propTypes = {
+  setIsDisabled: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+PuzzleFive.propTypes = {
+  setIsDisabled: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

@@ -14,11 +14,11 @@ function App() {
           <Route path='/' element={<><Header /><LandingPage /></>} />
   
           {/* Route when only the room name is present in the URL */}
-          <Route path='/room/:displayedRoomName' element={<><Header /><Story /></>} />
+          <Route path='/:displayedRoomName' element={<><Header /><Story /></>} />
   
           {/* New route to capture data sent by the backend */}
-          <Route path='alienRoom/:displayedRoomName/:backendData' element={<RoomOne />} />
-          <Route path='*' element={<ErrorHandling  />}/>
+          <Route path='/:displayedRoomName/:backendData' element={<RoomOne />} />
+          {/* <Route path='*' element={<ErrorHandling  />}/> */}
         </Routes>
       </div>
     );
