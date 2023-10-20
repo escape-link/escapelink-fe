@@ -15,6 +15,7 @@ import lamp from "../../assets/room/lamp.png";
 import deskComp from "../../assets/room/desk-comp.png";
 import bike from "../../assets/room/bike-front.png";
 import VictoryPage from "../VictoryPage/VictoryPage";
+import RoomHeader from "../RoomHeader/RoomHeader";
 
 export default function RoomOne() {
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
@@ -29,7 +30,7 @@ export default function RoomOne() {
     puzzleTwo: false,
     puzzleThree: false,
     puzzleFour: false,
-    puzzleFive: false
+    puzzleFive: false,
   });
   const [showVictoryPage, setShowVictoryPage] = useState(false);
 
@@ -44,7 +45,7 @@ export default function RoomOne() {
   };
 
   const roomStyle = {
-    "--room-bg": lampClicked ? "none" : `url(${blueBackground})`
+    "--room-bg": lampClicked ? "none" : `url(${blueBackground})`,
   };
 
   const handleClockClick = () => {
@@ -84,6 +85,7 @@ export default function RoomOne() {
 
   return (
     <div>
+      <RoomHeader />
       {showVictoryPage ? (
         <VictoryPage />
       ) : (
@@ -92,19 +94,25 @@ export default function RoomOne() {
           style={roomStyle}
         >
           <button
-            className={`clock-btn ${isDisabled.puzzleThree ? "disabled" : "active"}`}
+            className={`clock-btn ${
+              isDisabled.puzzleThree ? "disabled" : "active"
+            }`}
             onClick={handleClockClick}
           >
             <img className="clock" src={clock} alt="clock" />
           </button>
           <button
-            className={`plant-btn ${isDisabled.puzzleFour ? "disabled" : "active"}`}
+            className={`plant-btn ${
+              isDisabled.puzzleFour ? "disabled" : "active"
+            }`}
             onClick={handlePlantClick}
           >
             <img className="plant" src={plant} alt="plant" />
           </button>
           <button
-            className={`bike-btn ${isDisabled.puzzleFive ? "disabled" : "active"}`}
+            className={`bike-btn ${
+              isDisabled.puzzleFive ? "disabled" : "active"
+            }`}
             onClick={handleBikeClick}
           >
             <img className="bike" src={bike} alt="bike" />
@@ -116,7 +124,9 @@ export default function RoomOne() {
             <img className="board" src={board} alt="board" />
           </button>
           <button
-            className={`desk-comp-btn ${isDisabled.puzzleOne ? "disabled" : "active"}`}
+            className={`desk-comp-btn ${
+              isDisabled.puzzleOne ? "disabled" : "active"
+            }`}
             onClick={handleDeskCompClick}
           >
             <img className="desk-comp" src={deskComp} alt="desk" />
@@ -125,7 +135,9 @@ export default function RoomOne() {
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
           <button
-            className={`radio-btn ${isDisabled.puzzleTwo ? "disabled" : "active"}`}
+            className={`radio-btn ${
+              isDisabled.puzzleTwo ? "disabled" : "active"
+            }`}
             onClick={handleRadioClick}
           >
             <img className="radio" src={radio} alt="radio" />
