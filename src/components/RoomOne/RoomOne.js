@@ -45,6 +45,8 @@ export default function RoomOne() {
   const { gameName } = useParams();
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
+  const [dataSubscription, setDataSubscription] = useState(null); // New State for DataChannel subscription
+
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
@@ -53,8 +55,8 @@ export default function RoomOne() {
 
   useEffect(() => {
     const cable = createConsumer(
-      // 'ws://localhost:3000/cable'
-      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
+      'ws://localhost:3000/cable'
+      // 'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
       )
     const newSubscription = cable.subscriptions.create(
       {channel: 'GameChannel', room: gameName},
@@ -70,6 +72,28 @@ export default function RoomOne() {
       newSubscription.unsubscribe()
     }
   }, [gameName])
+
+  useEffect(() => {
+    const cable = createConsumer(
+      'ws://localhost:3000/cable'
+      // 'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
+    );
+    const newDataSubscription = cable.subscriptions.create(
+      { channel: 'DataChannel', game_name: gameName },
+      {
+        received: data => {
+          // Handle data from backend here
+          console.log('Received data from DataChannel:', data);
+        }
+      }
+    );
+    setDataSubscription(newDataSubscription);
+
+    return () => {
+      cable.disconnect();
+      newDataSubscription.unsubscribe();
+    };
+  }, [gameName]);
 
 
   useEffect(() => {
@@ -120,6 +144,16 @@ export default function RoomOne() {
   const handleLampClick = () => {
     setLampClicked(!lampClicked);
   };
+
+    // New function to send puzzle completion info to DataChannel
+    const puzzleCompleted = (puzzleIdentifier) => {
+      dataSubscription.send({ puzzle_identifier: puzzleIdentifier });
+    };
+
+    // New function to send game over info to DataChannel
+    const gameOver = () => {
+      dataSubscription.send({ game_over: true });
+    };
 
   return (
     <div>
@@ -206,6 +240,7 @@ export default function RoomOne() {
           )}
           {showPuzzleTwo && (
             <PuzzleTwo
+              dataSubscription={dataSubscription} // New Prop
               setIsDisabled={() => setPuzzleState("puzzleTwo")}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
