@@ -41,7 +41,7 @@ export default function PuzzleTwo({
         type="text"
         value={answer}
         onChange={handleChange}
-        placeholder="Enter answer"
+        placeholder="ex: 89.7"
       />
       <button onClick={handleSubmit}>Submit</button>
       <button onClick={onClose}>Close</button>
