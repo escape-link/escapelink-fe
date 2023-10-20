@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './PuzzleTwo.css';
+import PropTypes from 'prop-types';
 
 export default function PuzzleTwo({
   onClose,
@@ -47,3 +48,10 @@ export default function PuzzleTwo({
     </div>
   );
 }
+
+PuzzleTwo.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired,
+};
