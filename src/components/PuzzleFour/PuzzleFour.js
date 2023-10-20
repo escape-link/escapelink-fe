@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import './PuzzleFour.css'
+import './PuzzleFour.css';
 
-export default function PuzzleFour ({   
+export default function PuzzleFour({   
   onClose,
   winConditions,
   setWinConditions,
@@ -28,16 +29,23 @@ export default function PuzzleFour ({
   return (
     <div className="popup">
       <p>{incorrect}</p>
-    <h2>Some truths can only be found in the dark. </h2>
-    <p>Search the room. Might there be a hidden message we can't see just yet?</p>
-    <input
-      type="text"
-      value={answer}
-      onChange={handleChange}
-      placeholder="Enter answer"
-    />
-    <button onClick={handleSubmit}>Submit</button>
-    <button onClick={onClose}>Close</button>
-  </div>
-  )
+      <h2>Some truths can only be found in the dark. </h2>
+      <p>Search the room. Might there be a hidden message we can't see just yet?</p>
+      <input
+        type="text"
+        value={answer}
+        onChange={handleChange}
+        placeholder="Enter answer"
+      />
+      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
 }
+
+PuzzleFour.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired,
+};
