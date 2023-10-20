@@ -27,8 +27,8 @@ export default function PuzzleOne({
   return (
     <div className="popup">
       <p>{incorrect}</p>
-      <h2>What's that displayed on Bob's computer? Looks like a cipher...maybe he kept some notes on his whiteboard? </h2>
-      <p>Decode the cipher: what does the message on Bob's computer mean?</p>
+      <h2>Looks like Bob's been decoding a cipher...maybe he kept some notes on his whiteboard? </h2>
+      <p>What does it mean?</p>
       <input
         type="text"
         value={answer}
