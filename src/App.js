@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Room from './components/RoomOne/RoomOne'
 import Chat from './components/Chat/Chat';
 import LandingPage from './components/LandingPage/LandingPage';
+import RoomOne from './components/RoomOne/RoomOne';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path='/roomID' element={<Story/>}/>
            <Route path='/room/:roomName' element={
         <>
-          <Room />
+          <RoomOne />
           <Chat />
         </>
         } />
