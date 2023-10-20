@@ -4,6 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import fetchGameLink from '../../apiCalls';
 
 export default function Story() {
+  // const location = useLocation();
+  // const allMessages = location.state.allMessages
+  // const subscription = location.state.subscription;
   const navigate = useNavigate();
   const { displayedRoomName } = useParams(); // Getting the room name from the URL
 
@@ -15,7 +18,7 @@ export default function Story() {
       console.log(`${err.message}`);
     }
   };
-
+  // , { state: { allMessages, subscription } }
   return (
     <section className='landing-page-body' style={{ '--background': `url(${background})` }}>
       <div className='story-and-button'>

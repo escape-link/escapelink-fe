@@ -17,8 +17,15 @@ import bike from "../../assets/room/bike-front.png";
 import VictoryPage from "../VictoryPage/VictoryPage";
 import RoomHeader from "../RoomHeader/RoomHeader";
 import Cipher from "../Cipher/Cipher";
+import Chat from "../Chat/Chat";
+// import { useLocation } from "react-router-dom";
+import { createConsumer } from "@rails/actioncable";
+import { useParams } from "react-router-dom";
 
 export default function RoomOne() {
+  // const location= useLocation();
+  // const allMessages = location.state.allMessages;
+  // const subscription = location.state.subscription;
   const [showPuzzleOne, setShowPuzzleOne] = useState(false);
   const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
   const [showPuzzleThree, setShowPuzzleThree] = useState(false);
@@ -35,10 +42,35 @@ export default function RoomOne() {
   });
   const [showVictoryPage, setShowVictoryPage] = useState(false);
   const [isCipherVisible, setIsCipherVisible] = useState(false);
+  const { gameName } = useParams();
+  const [allMessages, setAllMessages] = useState([]);
+  const [subscription, setSubscription] = useState(null);
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
   };
+
+
+  useEffect(() => {
+    const cable = createConsumer(
+      // 'ws://localhost:3000/cable'
+      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
+      )
+    const newSubscription = cable.subscriptions.create(
+      {channel: 'GameChannel', room: gameName},
+      {
+        received: data => {
+          setAllMessages(allMessages => [...allMessages,`${data.nickname}: ${data.message}`])
+        }
+      }
+    )
+    setSubscription(newSubscription)
+    return () => {
+      cable.disconnect()
+      newSubscription.unsubscribe()
+    }
+  }, [gameName])
+
 
   useEffect(() => {
     if (winConditions.length === 5) {
@@ -204,6 +236,7 @@ export default function RoomOne() {
               onClose={handleClosePuzzleFive}
             />
           )}
+          <Chat gameName={gameName} allMessages={allMessages} subscription={subscription}/>
         </article>
       )}
 
