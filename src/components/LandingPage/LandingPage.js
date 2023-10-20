@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
-import { useNavigate, useParams } from 'react-router-dom';
-import { createConsumer } from '@rails/actioncable';
+import { useNavigate} from 'react-router-dom';
 
 export default function LandingPage() {
   // const { gameName } = useParams();

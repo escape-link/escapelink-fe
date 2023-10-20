@@ -1,7 +1,6 @@
 import './Chat.css';
-import { useContext, useEffect, useState } from 'react';
-import { createConsumer } from '@rails/actioncable';
-import { useLocation, useParams } from 'react-router-dom';
+import {useState } from 'react';
+import { useParams } from 'react-router-dom';
 import ChatWindow from '../ChatWindow/ChatWindow';
 // import { WebSocketContext } from '../Context/WebSocketContext';
 

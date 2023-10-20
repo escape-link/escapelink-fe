@@ -1,6 +1,6 @@
 import './Story.css';
 import background from '../../assets/big-donut.jpg';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import fetchGameLink from '../../apiCalls';
 
 export default function Story() {
