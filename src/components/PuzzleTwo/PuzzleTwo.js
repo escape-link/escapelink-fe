@@ -5,7 +5,8 @@ export default function PuzzleTwo({
   onClose,
   winConditions,
   setWinConditions,
-  setIsDisabled
+  setIsDisabled,
+  dataSubscription
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -19,12 +20,16 @@ export default function PuzzleTwo({
     if (answer === '94.5') {
       setWinConditions([...winConditions, answer]);
       onClose();
-      setIsDisabled()
+      setIsDisabled();
+
+      // Notify backend about puzzle completion
+      if (dataSubscription) {
+        dataSubscription.send({ puzzle_identifier: 'PuzzleTwoCompleted' });
+      }
     } else {
       setIncorrect('Incorrect: Please try again');
     }
   };
-
 
   return (
     <div className="popup">
