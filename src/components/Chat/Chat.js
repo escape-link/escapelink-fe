@@ -9,10 +9,10 @@ export default function Chat() {
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [hasNickname, setHasNickname] = useState(false);
-  const { roomName } = useParams();
+  const { gameName } = useParams();
 
   useEffect(() => {
-    const nicknameExist = localStorage.getItem(`nickname_${roomName}`);
+    const nicknameExist = localStorage.getItem(`nickname_${gameName}`);
     if (nicknameExist) {
       setNickname(nicknameExist);
       setHasNickname(true);
@@ -23,7 +23,7 @@ export default function Chat() {
       'ws://localhost:3000/cable'
     );
     const newSubscription = cable.subscriptions.create(
-      { channel: 'GameChannel', room: roomName },
+      { channel: 'GameChannel', game: gameName },
       {
         received: (data) => {
           setAllMessages((allMessages) => [
@@ -40,7 +40,7 @@ export default function Chat() {
       cable.disconnect()
       newSubscription.unsubscribe()
     }
-  }, [roomName]);
+  }, [gameName]);
 
   const handleSubmitMessage = (e) => {
     subscription.send({
@@ -51,7 +51,7 @@ export default function Chat() {
   };
 
   const handleNickname = () => {
-    localStorage.setItem(`nickname_${roomName}`, nickname);
+    localStorage.setItem(`nickname_${gameName}`, nickname);
     setHasNickname(true);
   };
 

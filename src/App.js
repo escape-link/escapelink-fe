@@ -15,17 +15,17 @@ function App() {
           <Header />
           <LandingPage />
           </>
-          } 
+          }
           />
           <Route path='/roomID' element={<Story/>}/>
-           <Route path='/room/:roomName' element={
+           <Route path='/room/:gameName' element={
         <>
           <RoomOne />
           <Chat />
         </>
         } />
       </Routes>
-    
+
     </div>
   );
 }
