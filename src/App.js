@@ -4,7 +4,6 @@ import Story from './components/Story/Story';
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import RoomOne from './components/RoomOne/RoomOne';
-import ErrorHandling from './components/ErrorHandling/ErrorHandling';
 
 function App() {
   return (
