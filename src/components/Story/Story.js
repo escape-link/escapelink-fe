@@ -1,6 +1,6 @@
 import './Story.css';
 import background from '../../assets/big-donut.jpg';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import fetchGameLink from '../../apiCalls';
 
 export default function Story() {
@@ -21,6 +21,10 @@ export default function Story() {
   // , { state: { allMessages, subscription } }
   return (
     <section className='landing-page-body' style={{ '--background': `url(${background})` }}>
+      <div className='back-home-container'> 
+      <Link to={'/'} className='back-home'>Back To Home</Link>
+      </div>
+     
       <div className='story-and-button'>
         <div className='story'>
           <p>
