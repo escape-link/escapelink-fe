@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import PuzzleOne from "../PuzzleOne/PuzzleOne";
-import PuzzleThree from "../../PuzzleThree/PuzzleThree";
+import PuzzleThree from "../PuzzleThree/PuzzleThree";
 import PuzzleTwo from "../PuzzleTwo/PuzzleTwo";
 import PuzzleFour from "../PuzzleFour/PuzzleFour";
 import PuzzleFive from "../PuzzleFive/PuzzleFive";
@@ -42,18 +42,20 @@ export default function RoomOne() {
   const { gameName } = useParams();
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
+  const [dataSubscription, setDataSubscription] = useState(null);
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
   };
 
   useEffect(() => {
-    const cable = createConsumer(
-      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
-    );
+    const cable = createConsumer('ws://localhost:3000/cable');
     const newSubscription = cable.subscriptions.create(
       { channel: "GameChannel", room: gameName },
       {
+        connected: () => {
+          console.log('Connected to GameChannel.');
+        },
         received: (data) => {
           setAllMessages((allMessages) => [
             ...allMessages,
@@ -62,18 +64,55 @@ export default function RoomOne() {
         },
       }
     );
+
+    const newDataSubscription = cable.subscriptions.create(
+      { channel: "DataChannel", game_name: gameName },
+      {
+        received: (data) => {
+          console.log({data})
+          if (data.puzzle_identifier === 1) {
+            setPuzzleState("puzzleOne")
+          }
+          if (data.puzzle_identifier === 2) {
+            setPuzzleState("puzzleTwo")
+          }
+          if (data.puzzle_identifier === 3) {
+            setPuzzleState("puzzleThree")
+          }
+          if (data.puzzle_identifier === 4) {
+            setPuzzleState("puzzleFour")
+          }
+          if (data.puzzle_identifier === 5) {
+            setPuzzleState("puzzleFive")
+          }
+          if (data.game_over) {
+            setShowVictoryPage(true);
+          }
+        },
+      }
+    );
+    setDataSubscription(newDataSubscription);
     setSubscription(newSubscription);
     return () => {
       cable.disconnect();
       newSubscription.unsubscribe();
+      newDataSubscription.unsubscribe();
     };
   }, [gameName]);
 
+  const puzzleCompleted = (puzzleIdentifier) => {
+    dataSubscription.send({
+      puzzle_identifier: puzzleIdentifier,
+    });
+  };
+
+
   useEffect(() => {
     if (winConditions.length === 5) {
+      dataSubscription.send({ game_over: true });
       setShowVictoryPage(true);
-    }
-  }, [winConditions]);
+    }    
+  }, [winConditions, dataSubscription]);
 
   const setPuzzleState = (puzzleNum) => {
     setIsDisabled((prevIsDisabled) => ({ ...prevIsDisabled, [puzzleNum]: true }));
@@ -192,6 +231,7 @@ export default function RoomOne() {
               winConditions={winConditions}
               setWinConditions={setWinConditions}
               onClose={handleClosePuzzleOne}
+              puzzleCompleted={puzzleCompleted}
             />
           )}
           {showPuzzleTwo && (
@@ -200,6 +240,7 @@ export default function RoomOne() {
               winConditions={winConditions}
               setWinConditions={setWinConditions}
               onClose={handleClosePuzzleTwo}
+              puzzleCompleted={puzzleCompleted}
             />
           )}
           {showPuzzleThree && (
@@ -208,6 +249,7 @@ export default function RoomOne() {
               winConditions={winConditions}
               setWinConditions={setWinConditions}
               onClose={handleClosePuzzleThree}
+              puzzleCompleted={puzzleCompleted}
             />
           )}
           {showPuzzleFour && (
@@ -216,6 +258,7 @@ export default function RoomOne() {
               winConditions={winConditions}
               setWinConditions={setWinConditions}
               onClose={handleClosePuzzleFour}
+              puzzleCompleted={puzzleCompleted}
             />
           )}
           {showPuzzleFive && (
@@ -224,6 +267,7 @@ export default function RoomOne() {
               winConditions={winConditions}
               setWinConditions={setWinConditions}
               onClose={handleClosePuzzleFive}
+              puzzleCompleted={puzzleCompleted}
             />
           )}
           <Chat gameName={gameName} allMessages={allMessages} subscription={subscription} />

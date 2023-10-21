@@ -6,7 +6,9 @@ export default function PuzzleOne({
   onClose,
   winConditions,
   setWinConditions,
-  setIsDisabled
+  setIsDisabled,
+  puzzleCompleted,
+ 
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');  
@@ -19,6 +21,8 @@ export default function PuzzleOne({
   const handleSubmit = () => {
     if (answer.toLowerCase() === 'portal') {
       setWinConditions([...winConditions, answer]);
+      puzzleCompleted(1)
+      
       onClose();
       setIsDisabled();
     } else {

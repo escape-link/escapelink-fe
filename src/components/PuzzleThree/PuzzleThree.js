@@ -6,7 +6,8 @@ export default function PuzzleThree({
   onClose,
   winConditions,
   setWinConditions,
-  setIsDisabled
+  setIsDisabled,
+  puzzleCompleted
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -19,6 +20,7 @@ export default function PuzzleThree({
   const handleSubmit = () => {
     if (answer.toLowerCase() === 'aliens') {
       setWinConditions([...winConditions, answer]);
+      puzzleCompleted(3)
       onClose();
       setIsDisabled()
     } else {
