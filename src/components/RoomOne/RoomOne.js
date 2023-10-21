@@ -112,7 +112,7 @@ export default function RoomOne() {
       dataSubscription.send({ game_over: true });
       setShowVictoryPage(true);
     }    
-  }, [winConditions]);
+  }, [winConditions, dataSubscription]);
 
   const setPuzzleState = (puzzleNum) => {
     setIsDisabled((prevIsDisabled) => ({ ...prevIsDisabled, [puzzleNum]: true }));
