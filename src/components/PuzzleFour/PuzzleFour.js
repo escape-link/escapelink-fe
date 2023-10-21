@@ -6,7 +6,8 @@ export default function PuzzleFour({
   onClose,
   winConditions,
   setWinConditions,
-  setIsDisabled
+  setIsDisabled,
+  puzzleCompleted
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -19,6 +20,7 @@ export default function PuzzleFour({
   const handleSubmit = () => {
     if (answer.toLowerCase() === 'alpha centauri') {
       setWinConditions([...winConditions, answer]);
+      puzzleCompleted(4)
       onClose();
       setIsDisabled(true);
     } else {
