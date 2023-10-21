@@ -6,7 +6,8 @@ export default function PuzzleFive({
   onClose,
   winConditions,
   setWinConditions,
-  setIsDisabled
+  setIsDisabled,
+  puzzleCompleted
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
@@ -19,6 +20,7 @@ export default function PuzzleFive({
   const handleSubmit = () => {
     if (answer.toLowerCase() === 'will smith') {
       setWinConditions([...winConditions, answer]);
+      puzzleCompleted(5)
       onClose();
       setIsDisabled(true);
     } else {
