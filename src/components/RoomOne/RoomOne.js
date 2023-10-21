@@ -43,15 +43,6 @@ export default function RoomOne() {
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [dataSubscription, setDataSubscription] = useState(null);
-  const [isSolved, setIsSolved] = useState({
-    puzzleOne: false,
-    puzzleTwo: false,
-    puzzleThree: false,
-    puzzleFour: false,
-    puzzleFive: false,
-  });
-
-  const [groupMemberPuzzle, setGroupMemberPuzzle] = useState([]);
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
@@ -115,15 +106,12 @@ export default function RoomOne() {
     });
   };
 
-console.log({winConditions})
+
   useEffect(() => {
     if (winConditions.length === 5) {
       dataSubscription.send({ game_over: true });
       setShowVictoryPage(true);
-    }
-
-
-    
+    }    
   }, [winConditions]);
 
   const setPuzzleState = (puzzleNum) => {
