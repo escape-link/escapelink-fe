@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import './PuzzleFive.css'
+import './PuzzleFive.css';
 
-export default function PuzzleFive ({   
+export default function PuzzleFive({   
   onClose,
   winConditions,
   setWinConditions,
@@ -38,6 +39,13 @@ export default function PuzzleFive ({
       />
       <button onClick={handleSubmit}>Submit</button>
       <button onClick={onClose}>Close</button>
-  </div>
-  )
+    </div>
+  );
 }
+
+PuzzleFive.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  winConditions: PropTypes.array.isRequired,
+  setWinConditions: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired,
+};
