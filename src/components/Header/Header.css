@@ -1,4 +1,4 @@
-header {
+/* header {
   display: flex;
   justify-content: center;
   background-color: #c0c4d7;
@@ -7,13 +7,32 @@ header {
   overflow: hidden;
   background: linear-gradient(to bottom, #8181a5 5%, #676980 100%);
   box-shadow: 0 30px 40px rgba(0,0,0,.1);
+} */
+header {
+  display: flex;
+  justify-content: center;
+  background-color: #c0c4d7;
+  width: 100vw;
+  padding: .5em 0em;
+  overflow: hidden;
+  padding: 1em 0em;
+  background: linear-gradient(to bottom, #39393f 5%, #2d2e33 100%);
+  box-shadow: inset 20px 20px 40px rgb(29 180 216 / 10%);
 }
 
 h1 {
-  font-size: 3em;
+  size: 3em;
+  color: #edf9ff;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-shadow: 0em 2em 7em rgb(119 174 199);
 }
 
-.alien{
+/* .alien{
   width: 7em;
   margin: -1.5em 
 }
+
+.logo {
+  width: 7em;
+  padding-left: 1em;
+} */
