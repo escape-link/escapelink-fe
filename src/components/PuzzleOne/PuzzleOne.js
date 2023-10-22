@@ -34,7 +34,7 @@ export default function PuzzleOne({
     <div className="popup">
       <p>{incorrect}</p>
       <h2>Looks like Bob's been decoding a cipher...maybe he kept some notes on his whiteboard? </h2>
-      <p>What does it mean?</p>
+      <p>What does ⌿⍜⍀⏁⏃⌰ mean?</p>
       <input
         type="text"
         value={answer}
