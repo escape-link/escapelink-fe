@@ -163,7 +163,7 @@ describe('escape room', () => {
   })
 
   it('should be able to send chats', () => {
-    cy.get('input').type('Totoro').should('have.value', 'Totoro')
+    cy.get('input').type('Totoro').should('have.value', 'Grogo')
     .get('button').last().click()
     cy.get('p').should('contain', 'Greetings Grogu')
     .get('.see-message-btn').click()
