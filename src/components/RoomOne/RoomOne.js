@@ -267,7 +267,7 @@ export default function RoomOne() {
             subscription={subscription}
           />
           {roomStyle['--room-bg'] === 'none' && (
-            <span className="alpha-centauri">alpha centauri</span>
+            <span className="alpha-centauri">⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟</span>
           )}
         </article>
       )}
