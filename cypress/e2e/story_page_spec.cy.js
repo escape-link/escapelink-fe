@@ -11,7 +11,7 @@ describe('story page', () => {
   })
   it('should see a story page', () => {
     cy.get('.room-one').click()
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob')
+    cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.story-body').should('have.css', 'background-image')
     .and('include', 'big-donut');
     cy.get('header').should('contain', 'Escape Link')
@@ -24,9 +24,9 @@ describe('story page', () => {
   })
   it('should be able to visit a game room on click', () => {
     cy.get('.room-one').click()
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob')
+    cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.start-game').click()
     cy.wait('@escapeRoom')
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob/crazy-brown-Gastly')
+    cy.url().should('eq', 'http://localhost:3001/roomOne/wheres-bob/crazy-brown-Gastly')
     })
 })

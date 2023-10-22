@@ -16,7 +16,7 @@ describe('landing page', () => {
   it('should be able to visit a story about Alien Escape upon click', () => {
     cy.visit('http://localhost:3001/');
     cy.get('.room-one').click()
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob')
+    cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.back-home').click()
     cy.url().should('eq', 'http://localhost:3001/')
   })

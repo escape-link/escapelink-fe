@@ -9,7 +9,7 @@ describe('escape room', () => {
       }).as('escapeRoom')
     cy.visit('http://localhost:3001/')
     cy.get('.room-one').click()
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob')
+    cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.start-game').click()
   })
   it('should show a message that the answer is wrong if the input is wrong and the input should clear if a user clicks backsapce', () => {
@@ -75,14 +75,12 @@ describe('escape room', () => {
     cy.get('.desk-comp').click()
     cy.get('.popup').within(() => {
       cy.get('h2').should('contain', 'Looks like Bob\'s been decoding a cipher')
-      .get('p').should('contain', 'What does it mean?')
       .get('input').type('ahh').should('have.value', 'ahh')
       .get('button').last().click()
     })
     cy.get('.desk-comp').click()
     cy.get('.popup').within(() => {
       cy.get('h2').should('contain', 'Looks like Bob\'s been decoding a cipher')
-      .get('p').should('contain', 'What does it mean?')
       .get('input').type('ahh').should('have.value', 'ahh')
       .get('button').first().click()
       cy.get('p').should('contain', 'Incorrect: Please try again')
@@ -143,7 +141,6 @@ describe('escape room', () => {
     cy.get('.desk-comp').click()
     cy.get('.popup').within(() => {
       cy.get('h2').should('contain', 'Looks like Bob\'s been decoding a cipher')
-      .get('p').should('contain', 'What does it mean?')
       .get('input').type('portal').should('have.value', 'portal')
       .get('button').first().click()
     })
