@@ -35,8 +35,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s;
-  overflow: hidden; /* Remove scroll bars and overflow */
+  /* transition: transform 0.3s; */
+  overflow: hidden;
 }
 
 /* Button hover effect */
