@@ -16,7 +16,7 @@ export default function Chat({subscription, allMessages}) {
   // const [allMessages, setAllMessages] = useState([]);
   // const [subscription, setSubscription] = useState(null);
   const [hasNickname, setHasNickname] = useState(false);
-  const { gameName } = useParams();
+  const { backendData } = useParams();
   const [chatOpen, setChatOpen] = useState(false)
 
   // useEffect(() => {
@@ -59,7 +59,7 @@ export default function Chat({subscription, allMessages}) {
   };
 
   const handleNickname = () => {
-    localStorage.setItem(`nickname_${gameName}`, nickname);
+    localStorage.setItem(`nickname_${backendData}`, nickname);
     setHasNickname(true);
   };
 

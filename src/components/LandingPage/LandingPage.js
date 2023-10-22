@@ -50,13 +50,13 @@ export default function LandingPage() {
 
   return (
     <div className="landing-page">
-      Welcome to EscapeLink! Choose your room
+      <h2 className='welcome'>Choose your room!</h2>
       <div className="buttons">
-        <button onClick={() => goToRoom('wheres-bob')} className="Room-One">Alien Escape!</button>
-        <button>Coming Soon</button>
-        <button>Coming Soon</button>
-        <button>Coming Soon</button>
-        <button>Coming Soon</button>
+        <button onClick={() => goToRoom('wheres-bob')} className="room-one">Alien Escape!</button>
+        <button className='coming-soon'>Coming Soon</button>
+        <button className='coming-soon'>Coming Soon</button>
+        <button className='coming-soon'>Coming Soon</button>
+        <button className='coming-soon'>Coming Soon</button>
       </div>
     </div>
   );

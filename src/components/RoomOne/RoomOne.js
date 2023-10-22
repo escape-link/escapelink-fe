@@ -39,7 +39,7 @@ export default function RoomOne() {
   });
   const [showVictoryPage, setShowVictoryPage] = useState(false);
   const [isCipherVisible, setIsCipherVisible] = useState(false);
-  const { gameName } = useParams();
+  const { backendData } = useParams();
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [dataSubscription, setDataSubscription] = useState(null);
@@ -51,11 +51,8 @@ export default function RoomOne() {
   useEffect(() => {
     const cable = createConsumer('ws://localhost:3000/cable');
     const newSubscription = cable.subscriptions.create(
-      { channel: "GameChannel", room: gameName },
+      { channel: "GameChannel", room: backendData },
       {
-        connected: () => {
-          console.log('Connected to GameChannel.');
-        },
         received: (data) => {
           setAllMessages((allMessages) => [
             ...allMessages,
@@ -66,10 +63,9 @@ export default function RoomOne() {
     );
 
     const newDataSubscription = cable.subscriptions.create(
-      { channel: "DataChannel", game_name: gameName },
+      { channel: "DataChannel", game_name: backendData },
       {
         received: (data) => {
-          console.log({data})
           if (data.puzzle_identifier === 1) {
             setPuzzleState("puzzleOne")
           }
@@ -91,14 +87,18 @@ export default function RoomOne() {
         },
       }
     );
+
+    cable.connection.events.error = 
+
     setDataSubscription(newDataSubscription);
     setSubscription(newSubscription);
+
     return () => {
       cable.disconnect();
       newSubscription.unsubscribe();
       newDataSubscription.unsubscribe();
     };
-  }, [gameName]);
+  }, [backendData]);
 
   const puzzleCompleted = (puzzleIdentifier) => {
     dataSubscription.send({
@@ -270,7 +270,7 @@ export default function RoomOne() {
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          <Chat gameName={gameName} allMessages={allMessages} subscription={subscription} />
+          <Chat backendData={backendData} allMessages={allMessages} subscription={subscription} />
         </article>
       )}
 

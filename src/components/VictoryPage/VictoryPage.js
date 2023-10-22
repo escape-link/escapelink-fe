@@ -11,7 +11,7 @@ export default function VictoryPage() {
 
   return (
     <div className="victory-page">
-      <h1>Room 1 complete. A portal opens...Bob must be even further away than we thought.</h1>
+      <h2>Room 1 complete. A portal opens...Bob must be even further away than we thought.</h2>
       <p>Your journey has just begun.</p>
       <button onClick={handleBackToStoryClick}>Home</button>
     </div>
