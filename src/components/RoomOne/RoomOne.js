@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PuzzleOne from '../PuzzleOne/PuzzleOne';
 import PuzzleThree from '../PuzzleThree/PuzzleThree';
@@ -22,11 +22,7 @@ import { createConsumer } from '@rails/actioncable';
 import { useParams } from 'react-router-dom';
 
 export default function RoomOne() {
-  const [showPuzzleOne, setShowPuzzleOne] = useState(false);
-  const [showPuzzleTwo, setShowPuzzleTwo] = useState(false);
-  const [showPuzzleThree, setShowPuzzleThree] = useState(false);
-  const [showPuzzleFour, setShowPuzzleFour] = useState(false);
-  const [showPuzzleFive, setShowPuzzleFive] = useState(false);
+  const [openPopup, setOpenPopup] = useState(null);
   const [lampClicked, setLampClicked] = useState(false);
   const [winConditions, setWinConditions] = useState([]);
   const [isDisabled, setIsDisabled] = useState({
@@ -103,6 +99,7 @@ export default function RoomOne() {
     });
   };
 
+
   useEffect(() => {
     if (winConditions.length === 5) {
       dataSubscription.send({ game_over: true });
@@ -118,40 +115,37 @@ export default function RoomOne() {
   };
 
   const roomStyle = {
-    '--room-bg': lampClicked ? 'none' : `url(${blueBackground})`
+    "--room-bg": lampClicked ? "none" : `url(${blueBackground})`,
+  };
+
+  const handlePopupOpen = (popupName) => {
+    setOpenPopup(popupName);
+  };
+
+  const handlePopupClose = () => {
+    setOpenPopup(null);
   };
 
   const handleClockClick = () => {
-    setShowPuzzleThree(true);
-  };
-  const handleClosePuzzleThree = () => {
-    setShowPuzzleThree(false);
+    handlePopupOpen("puzzleThree");
   };
 
   const handleDeskCompClick = () => {
-    setShowPuzzleOne(true);
+    handlePopupOpen("puzzleOne");
   };
-  const handleClosePuzzleOne = () => {
-    setShowPuzzleOne(false);
-  };
+
   const handleRadioClick = () => {
-    setShowPuzzleTwo(true);
+    handlePopupOpen("puzzleTwo");
   };
-  const handleClosePuzzleTwo = () => {
-    setShowPuzzleTwo(false);
-  };
+
   const handlePlantClick = () => {
-    setShowPuzzleFour(true);
+    handlePopupOpen("puzzleFour");
   };
-  const handleClosePuzzleFour = () => {
-    setShowPuzzleFour(false);
-  };
+
   const handleBikeClick = () => {
-    setShowPuzzleFive(true);
+    handlePopupOpen("puzzleFive");
   };
-  const handleClosePuzzleFive = () => {
-    setShowPuzzleFive(false);
-  };
+
   const handleLampClick = () => {
     setLampClicked(!lampClicked);
   };
@@ -216,48 +210,48 @@ export default function RoomOne() {
             tabIndex={isDisabled.puzzleTwo ? -1 : 0}>
             <img className="radio" src={radio} alt="radio" />
           </button>
-          {showPuzzleOne && (
+          {openPopup === "puzzleOne" && (
             <PuzzleOne
               setIsDisabled={() => setPuzzleState('puzzleOne')}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
-              onClose={handleClosePuzzleOne}
+              onClose={handlePopupClose}
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {showPuzzleTwo && (
+          {openPopup === "puzzleTwo" && (
             <PuzzleTwo
               setIsDisabled={() => setPuzzleState('puzzleTwo')}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
-              onClose={handleClosePuzzleTwo}
+              onClose={handlePopupClose}
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {showPuzzleThree && (
+          {openPopup === "puzzleThree" && (
             <PuzzleThree
               setIsDisabled={() => setPuzzleState('puzzleThree')}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
-              onClose={handleClosePuzzleThree}
+              onClose={handlePopupClose}
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {showPuzzleFour && (
+          {openPopup === "puzzleFour" && (
             <PuzzleFour
               setIsDisabled={() => setPuzzleState('puzzleFour')}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
-              onClose={handleClosePuzzleFour}
+              onClose={handlePopupClose}
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {showPuzzleFive && (
+          {openPopup === "puzzleFive" && (
             <PuzzleFive
               setIsDisabled={() => setPuzzleState('puzzleFive')}
               winConditions={winConditions}
               setWinConditions={setWinConditions}
-              onClose={handleClosePuzzleFive}
+              onClose={handlePopupClose}
               puzzleCompleted={puzzleCompleted}
             />
           )}
