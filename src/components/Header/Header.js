@@ -1,9 +1,8 @@
 import './Header.css'
-import alien from '../../assets/alien.png'
+// import alien from '../../assets/alien.png'
 // import logo from '../../../public/escapelinklogo.png'
 
 export default function Header() {
-  const logo = '/escapelinklogoV2.png'
   return (
     <header>
       <h1>Escape Link</h1>
