@@ -170,7 +170,7 @@ describe('escape room', () => {
     cy.get('.messages-container').should('be.visible')
     .get('#currentMessage').type('ayo')
     cy.get('.messages-container > :nth-child(4)').click()
-    cy.get('.messages-container').should('contain', 'Grogu: ayo');
+    cy.get('.popout-chat > p').should('contain', 'Grogu: ayo');
   })
 })
 // const receivedMessages = [];
