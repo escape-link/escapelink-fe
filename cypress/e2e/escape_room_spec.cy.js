@@ -8,11 +8,11 @@ describe('escape room', () => {
         }
       }).as('escapeRoom')
     cy.visit('http://localhost:3001/')
-  })
-  it('should show a message that the answer is wrong if the input is wrong and the input should clear if a user clicks backsapce', () => {
     cy.get('.room-one').click()
     cy.url().should('eq', 'http://localhost:3001/wheres-bob')
     cy.get('.start-game').click()
+  })
+  it('should show a message that the answer is wrong if the input is wrong and the input should clear if a user clicks backsapce', () => {
     cy.get('.clock').click()
     cy.get('.popup').within(() => {
       cy.get('h2').should('contain', 'Riddle')
@@ -113,9 +113,6 @@ describe('escape room', () => {
     cy.get('.room').should('not.contain', '.popup');
   })
   it('should show a victory page after all puzzles are solved and can go back home upon click', () => {
-    cy.get('.room-one').click()
-    cy.url().should('eq', 'http://localhost:3001/wheres-bob')
-    cy.get('.start-game').click()
     cy.get('.clock').click()
     cy.get('.popup').within(() => {
       cy.get('h2').should('contain', 'Riddle')
@@ -165,4 +162,40 @@ describe('escape room', () => {
     cy.url().should('eq', 'http://localhost:3001/')
   })
 
+  it('should be able to send chats', () => {
+    cy.get('input').type('Totoro').should('have.value', 'Totoro')
+    .get('button').last().click()
+    cy.get('p').should('contain', 'Greetings Grogu')
+    .get('.see-message-btn').click()
+    cy.get('.messages-container').should('be.visible')
+    .get('#currentMessage').type('ayo')
+    cy.get('.messages-container > :nth-child(4)').click()
+    cy.get('.messages-container').should('contain', 'Grogu: ayo');
+  })
 })
+// const receivedMessages = [];
+// cy.intercept('GET', 'ws://localhost:3000/cable').as('websocketRoute');
+
+// cy.get('.messages-container').then((container) => {
+//   const subscription = container.cable.subscriptions.subscriptions[0];
+//   subscription.send({
+//     nickname: 'Totoro',
+//     message: 'ayo',
+//   });
+// });
+// cy.window().then((win) => {
+//   const ws = new WebSocket('ws://localhost:3000/cable');
+//   ws.addEventListener('open', () => {
+//     ws.send(JSON.stringify({
+//       nickname: 'Totoro',
+//       message: 'ayo',
+//     }));
+//   });  
+//   ws.addEventListener('message', (event) => {
+//   receivedMessages.push(JSON.parse(event.data));
+//   });
+// });
+// cy.wait('@websocketRoute').its('response.statusCode').should('eq', 101);
+// cy.wait('@websocketRoute').then(() => {
+//   expect(receivedMessages).to.deep.include({ nickname: 'Totoro', message: 'ayo' });
+// });
