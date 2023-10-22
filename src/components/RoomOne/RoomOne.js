@@ -16,7 +16,6 @@ import lamp from "../../assets/room/lamp.png";
 import deskComp from "../../assets/room/desk-comp.png";
 import bike from "../../assets/room/bike-front.png";
 import VictoryPage from "../VictoryPage/VictoryPage";
-import RoomHeader from "../RoomHeader/RoomHeader";
 import Cipher from "../Cipher/Cipher";
 import Chat from "../Chat/Chat";
 import { createConsumer } from "@rails/actioncable";
@@ -88,8 +87,6 @@ export default function RoomOne() {
       }
     );
 
-    cable.connection.events.error = 
-
     setDataSubscription(newDataSubscription);
     setSubscription(newSubscription);
 
@@ -159,7 +156,7 @@ export default function RoomOne() {
 
   return (
     <div>
-      <RoomHeader />
+      {/* <RoomHeader /> */}
       {showVictoryPage ? (
         <VictoryPage />
       ) : (
@@ -278,10 +275,6 @@ export default function RoomOne() {
     </div>
   );
 }
-
-RoomOne.propTypes = {
-  gameName: PropTypes.string.isRequired,
-};
 
 PuzzleOne.propTypes = {
   setIsDisabled: PropTypes.func.isRequired,
