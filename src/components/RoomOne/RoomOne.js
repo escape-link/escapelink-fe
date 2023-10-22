@@ -88,7 +88,7 @@ export default function RoomOne() {
       }
     );
 
-    cable.connection.events.error = 
+    // cable.connection.events.error = 
 
     setDataSubscription(newDataSubscription);
     setSubscription(newSubscription);
@@ -159,7 +159,7 @@ export default function RoomOne() {
 
   return (
     <div>
-      <RoomHeader />
+      {/* <RoomHeader /> */}
       {showVictoryPage ? (
         <VictoryPage />
       ) : (

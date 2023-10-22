@@ -20,7 +20,7 @@ export default function Story() {
   };
   // , { state: { allMessages, subscription } }
   return (
-    <section className='landing-page-body' style={{ '--background': `url(${background})` }}>
+    <section className='story-body' style={{ '--background': `url(${background})` }}>
       <div className='back-home-container'> 
       <Link to={'/'} className='back-home'>Back To Home</Link>
       </div>
