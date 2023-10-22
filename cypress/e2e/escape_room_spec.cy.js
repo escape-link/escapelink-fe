@@ -163,15 +163,16 @@ describe('escape room', () => {
   })
 
   it('should be able to send chats', () => {
-    cy.get('input').type('Grogu').should('have.value', 'Grogo')
+    cy.get('input').type('Grogu').should('have.value', 'Grogu')
     .get('button').last().click()
     cy.get('p').should('contain', 'Greetings Grogu')
     .get('.see-message-btn').click()
     cy.get('.messages-container').should('be.visible')
     .get('#currentMessage').type('ayo')
     cy.get('.messages-container > :nth-child(4)').click()
-    cy.get('.messages-container').should('contain', 'Grogu: ayo');
+    cy.get('.popout-chat > p').should('contain', 'Grogu: ayo');
   })
+
 })
 // const receivedMessages = [];
 // cy.intercept('GET', 'ws://localhost:3000/cable').as('websocketRoute');
