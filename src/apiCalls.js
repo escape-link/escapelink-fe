@@ -15,7 +15,7 @@ export default async function fetchGameLink() {
       'Content-Type': 'application/json',
       'X-CSRF-Token': getCookie('X-CSRF-Token')
     },
-    body: JSON.stringify({ room_name }), // Include the room_name in the request body
+    body: JSON.stringify({ room_name }),
   })
   if (!res.ok) {
     throw new Error( `${res.status}: Unable to retrieve link`)
