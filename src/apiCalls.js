@@ -6,9 +6,8 @@ const getCookie = (name) => {
 
 
 export default async function fetchGameLink() {
-  const room_name = "Where's Bob?"; // Define the room_name variable as '1'
-  // const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
-  const res = await fetch('http://localhost:3000/api/v0/games', {
+  const room_name = "Where's Bob?"; 
+  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
     method: 'POST',
     credentials: 'include',
     headers: {
