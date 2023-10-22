@@ -13,7 +13,7 @@ export default function LandingPage() {
 
   const goToRoom = (roomName) => {
     displayedRoomName = roomName;
-    navigate(`/${displayedRoomName}` );
+    navigate(`room/${displayedRoomName}` );
   };
   
   // { state: { allMessages } }
