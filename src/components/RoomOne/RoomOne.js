@@ -156,7 +156,6 @@ export default function RoomOne() {
 
   return (
     <div>
-      {/* <RoomHeader /> */}
       {showVictoryPage ? (
         <VictoryPage />
       ) : (

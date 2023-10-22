@@ -4,11 +4,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import fetchGameLink from '../../apiCalls';
 
 export default function Story() {
-  // const location = useLocation();
-  // const allMessages = location.state.allMessages
-  // const subscription = location.state.subscription;
   const navigate = useNavigate();
-  const { displayedRoomName } = useParams(); // Getting the room name from the URL
+  const { displayedRoomName } = useParams(); 
 
   const startGame = async () => {
     try {
@@ -18,7 +15,7 @@ export default function Story() {
       console.log(`${err.message}`);
     }
   };
-  // , { state: { allMessages, subscription } }
+
   return (
     <section className='story-body' style={{ '--background': `url(${background})` }}>
       <div className='back-home-container'> 
