@@ -44,7 +44,8 @@ export default function RoomOne() {
   };
 
   useEffect(() => {
-    const cable = createConsumer('wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable');
+    const cable = createConsumer('ws://localhost:3000/cable');
+    // const cable = createConsumer('wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable');
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: backendData },
       {
