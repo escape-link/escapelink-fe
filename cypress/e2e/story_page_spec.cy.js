@@ -1,15 +1,15 @@
 describe('story page', () => {
   beforeEach(() => {
     cy.intercept('POST', 'http://localhost:3000/api/v0/games', {
-      statusCode: 200,
+      statusCode: 201,
       body: {
           "game_name": "crazy-brown-Gastly",
           "game_link": "/api/v0/games?game_name=crazy-brown-Gastly"
         }
-      })
+      }).as('escapeRoom')
+    })
+    it('should see a story page', () => {
     cy.visit('http://localhost:3001/')
-  })
-  it('should see a story page', () => {
     cy.get('.room-one').click()
     cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.story-body').should('have.css', 'background-image')
@@ -23,10 +23,11 @@ describe('story page', () => {
     cy.get('.start-game').should('exist')
   })
   it('should be able to visit a game room on click', () => {
+    cy.visit('http://localhost:3001/')
     cy.get('.room-one').click()
     cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.start-game').click()
-   
+    cy.wait('@escapeRoom')
     cy.url().should('eq', 'http://localhost:3001/roomOne/wheres-bob/crazy-brown-Gastly')
     })
 })
