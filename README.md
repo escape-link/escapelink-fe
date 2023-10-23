@@ -80,7 +80,26 @@ Don't forget to give the project a star! Thanks again!
 
 To get a local copy, follow these simple instructions
 
-1. Fork the project
+```
+# Fork the project
+
+# Clone this repo to your local machine by running:
+git clone git@github.com:your_username/escapelink-fe.git 
+
+# Cd into the root directory 
+cd escapelink-fe
+
+# Install dependencies 
+npm install
+
+# Run the start script
+npm start
+```
+.....OR:
+
+See the deployed project [here](https://escapelink-fe.vercel.app/)
+
+1. Fork the backend repo: [here](https://github.com/escape-link/escapelink-be)
 2. Clone the repo
    ```
    git clone git@github.com:your_username/escapelink-be.git
