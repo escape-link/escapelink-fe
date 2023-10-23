@@ -6,7 +6,7 @@ describe('story page', () => {
           "game_name": "crazy-brown-Gastly",
           "game_link": "/api/v0/games?game_name=crazy-brown-Gastly"
         }
-      }).as('escapeRoom')
+      })
     cy.visit('http://localhost:3001/')
   })
   it('should see a story page', () => {
@@ -26,7 +26,7 @@ describe('story page', () => {
     cy.get('.room-one').click()
     cy.url().should('eq', 'http://localhost:3001/room/wheres-bob')
     cy.get('.start-game').click()
-    cy.wait('@escapeRoom')
+   
     cy.url().should('eq', 'http://localhost:3001/roomOne/wheres-bob/crazy-brown-Gastly')
     })
 })
