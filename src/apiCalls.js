@@ -4,10 +4,10 @@ const getCookie = (name) => {
   if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
-
 export default async function fetchGameLink() {
   const room_name = "Where's Bob?"; 
-  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
+  // const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
+  const res = await fetch('http://localhost:3000/api/v0/games', {
     method: 'POST',
     credentials: 'include',
     headers: {
