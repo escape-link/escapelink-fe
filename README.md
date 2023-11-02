@@ -36,7 +36,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-EscapeLink is a SOA app and needs both this front-end repo AND [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) ](https://github.com/escape-link/escapelink-be) (back-end) in order to be fully functioning.
+EscapeLink is a SOA app and needs both this front-end repo AND [back-end repo](https://github.com/escape-link/escapelink-be) in order to be fully functioning.
 
 
 ### Overview
@@ -48,6 +48,20 @@ After being debriefed on the current mission, users have the option to either te
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Screenshots
+<details open>
+  <summary> ⚙️ Functionality </summary>
+  
+  | Description | Screenshot |
+  |------------ | -----------|
+  | <h3 align="center">Home Page | ![landing-page](https://github.com/escape-link/escapelink-fe/assets/129805348/13aa4540-80c8-4af7-a440-71419bfb6737)
+  | <h3 align="center">Chat Feature | ![chat](https://github.com/escape-link/escapelink-fe/assets/129805348/af8fb1fc-2fb2-4cde-be56-0f8889042682)
+  | <h3 align="center">Game | ![game](https://github.com/escape-link/escapelink-fe/assets/129805348/d2ce816d-1d2c-4564-b552-761af0becac4)
+  | <h3 align="center">Victory | ![victory](https://github.com/escape-link/escapelink-fe/assets/129805348/9628b2ae-34c2-4143-8639-bf4301cd14ec)
+
+
+</details>
 
 
 
@@ -98,33 +112,6 @@ npm start
 .....OR:
 
 See the deployed project [here](https://escapelink-fe.vercel.app/)
-
-1. Fork the backend repo: [here](https://github.com/escape-link/escapelink-be)
-2. Clone the repo
-   ```
-   git clone git@github.com:your_username/escapelink-be.git
-   ```
-3. Install the gems
-   ```
-   bundle install
-   ```
-4. Create the database
-   ```
-   rails db:{create,migrate}
-   ```
-5. Create your feature branch
-  ```
-  git checkout -b feature/AmazingFeature
-  ```
-6. Commit your changes
-  ```
-  git commit -m "add AmazingFeature"
-  ```
-7. Push to the branch
-  ```
-  git push origin feature/AmazingFeature
-  ```
-8. Open a pull request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
