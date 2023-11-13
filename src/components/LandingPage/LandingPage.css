@@ -1,31 +1,27 @@
 .landing-page {
-    background-image: url(/public/escapelinklogo.png);
-    background-size: cover;
-    height: 110vh;
-    width: 100vw;
+    background-color: #d4d8dd;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    align-items: center;
 }
 
-/* .buttons {
-    background: linear-gradient(to bottom, #667688 5%, #ccccc6 100%);
-    border-radius: 10px;
-    border: 4px solid #000000;
+.buttons {
     cursor: pointer;
     color: black;
     font-size: 1em;
     font-weight: bold;
-    padding: 0.5em 2em;
-    margin: 1rem .5rem;
+    width: 15rem;
     text-decoration: none;
     display: flex;
     flex-direction: column;
-} */
+    align-items: center;
+}
 
 .welcome {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: xx-large;
+    margin: 0.5rem
 }
 
 .room-one {
