@@ -1,0 +1,66 @@
+.chat {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0rem .2rem .2rem 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.name.hidden {
+  display: none;
+}
+
+.greetings.hidden {
+  display: none;
+}
+
+.see-message-btn,
+.enter
+ {
+  background: linear-gradient(to bottom, #c9d1d8 5%, #dee9e7 100%);
+  border-radius: 3.5px;
+  border: 1.5px solid #000000;
+  color: black;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0.2em .4em;
+  cursor: pointer;
+}
+
+#nickname {
+  font-size: 1em;
+  padding: 0.2em .4em;
+}
+
+.see-message-btn.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 585px) {
+  .see-message-btn,
+  .enter
+   {
+    border: 1px solid #000000;
+    font-size: .85em;
+    padding: 0.2em .3em;
+  }
+  
+  #nickname {
+    font-size: .85em;
+    padding: 0.1em .3em;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .see-message-btn,
+  .enter
+   {
+    max-width:15em;
+  }
+  
+  #nickname {
+    max-width: 8.4em;
+  }
+}

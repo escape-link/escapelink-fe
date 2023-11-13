@@ -29,10 +29,10 @@ export default function Chat({subscription, allMessages}) {
   
   return (
     <div className='chat'>
-       <button className='see-message-btn' onClick={openPopOutChat}>See Messages</button>
+       <button className={`see-message-btn ${chatOpen ? 'hidden' : ''}`} onClick={openPopOutChat}>See Messages</button>
     {chatOpen && <ChatWindow allMessages={allMessages} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} handleSubmitMessage={handleSubmitMessage} openPopOutChat={openPopOutChat} />}
       {!hasNickname ? (
-        <div>
+        <div className={`name ${chatOpen ? 'hidden' : ''}`}>
           <label htmlFor="nickname" />
           <input
             id="nickname"
@@ -42,10 +42,10 @@ export default function Chat({subscription, allMessages}) {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <button onClick={handleNickname}>Enter</button>
+          <button className='enter' onClick={handleNickname}>Enter</button>
         </div>
       ) : (
-        <div>
+        <div className={`greetings ${chatOpen ? 'hidden' : ''}`}>
           <p>Greetings {nickname}</p>
         </div>
       )}
