@@ -4,7 +4,7 @@ export default function ChatWindow({currentMessage, setCurrentMessage, handleSub
 
     const messagesToAdd = allMessages.map((message, index) => (
       <div key={index}className='popout-chat'>
-        <p >{message}</p>
+        <p>{message}</p>
     </div> 
     ));
   

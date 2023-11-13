@@ -112,6 +112,9 @@
   display: flex;
 }
 
+.radio {
+  margin-bottom: 6rem;
+}
 .lamp-btn {
   grid-area: lamp;
   display: flex;
@@ -158,6 +161,9 @@
   }
   .desk-comp {
     width: 55%;
+  }
+  .radio {
+    width: 80%
   }
 }
 

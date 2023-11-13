@@ -1,10 +1,50 @@
 .messages-container {
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  width: 15rem;
-  height: 20rem;
+  bottom: 0rem;
+  right: .25rem;
+  width: 14rem;
+  max-height: 11rem;
   border: 1px solid #ccc;
+  border-radius: 5px;
   background-color: #fff;
   flex-direction: column;
+  overflow-y: auto;
+}
+
+#currentMessage {
+  width: 13.85rem;
+  resize: none;
+}
+
+.popout-chat {
+  word-wrap: break-word;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 0; 
+}
+
+@media screen and (max-width: 585px) {
+  .messages-container {
+    width: 12rem
+  }
+  #currentMessage {
+    width: 11.85rem
+  }
+}
+@media screen and (max-width: 385px) {
+  .messages-container {
+    width: 10rem
+  }
+  #currentMessage {
+    width: 9.85rem
+  }
+}
+@media screen and (max-width: 300px) {
+  .messages-container {
+    width: 8rem
+  }
+  #currentMessage {
+    width: 7.85rem
+  }
 }
