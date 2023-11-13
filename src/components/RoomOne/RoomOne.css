@@ -77,8 +77,6 @@
 }
 
 .door {
-  grid-area: door;
-  width: 50%;
   max-width: 20em;
 }
 
@@ -100,7 +98,7 @@
 
 .board {
   width: 100%;
-  max-width: 30em;
+  max-width: 40em;
 }
 
 .desk-comp-btn {
@@ -121,6 +119,19 @@
   align-items: center;
 }
 
+.clock,
+.radio,
+.desk-comp,
+.plant,
+.bike,
+.door {
+  width: 100%;
+}
+
+.lamp {
+  width: 150%;
+}
+
 .invert-colors {
   background-color: black;
 }
@@ -130,12 +141,28 @@
 }
 
 .alpha-centauri {
-  color:white;
+  color: white;
 }
 
+@media screen and (max-width: 1025px) {
+  .room {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      'clock board board lamp'
+      'bike door door lamp'
+      'plant desk desk radio ';
+  }
+  .door {
+    width: 70%;
+  }
+  .desk-comp {
+    width: 55%;
+  }
+}
 
 @media screen and (max-width: 768px) {
-  .room {
+  /* .room {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-template-areas:
@@ -143,5 +170,86 @@
       'bike door'
       'plant desk'
       'radio lamp';
+  } */
+  .room {
+    padding: 0rem;
+  }
+
+  .board,
+  .clock,
+  .radio,
+  .plant,
+  .bike {
+    width: 90%;
+  }
+
+  .desk-comp {
+    width: 50%;
+  }
+  .lamp {
+    width: 140%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .board,
+  .clock,
+  .radio,
+  .plant,
+  .bike {
+    width: 100%;
+  }
+  .door {
+    width: 75%;
+  }
+  .desk-comp {
+    width: 60%;
+  }
+  .lamp {
+    width: 160%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .room {
+    grid-template-columns: 0.8fr 1fr 1.2fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      'clock board board'
+      'bike door lamp'
+      'plant desk radio ';
+  }
+
+  .clock,
+  .plant,
+  .bike,
+  .radio {
+    width: 70%;
+  }
+
+  .board {
+    width: 90%;
+  }
+
+  .door {
+    width: 110%;
+  }
+  .desk-comp {
+    width: 90%;
+  }
+  .lamp {
+    width: 120%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .room {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4 1fr);
+    grid-template-areas:
+      'clock board'
+      'bike door'
+      'plant lamp'
+      'desk radio';
   }
 }
