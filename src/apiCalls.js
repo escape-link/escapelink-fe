@@ -4,16 +4,14 @@ const getCookie = (name) => {
   if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
-export default async function fetchGameLink() {
-  const room_name = "Where's Bob?"; 
-  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
+export default async function fetchGameLink(roomName) {
+  const res = await fetch(`https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games?room_name=${roomName}`, {
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'X-CSRF-Token': getCookie('X-CSRF-Token')
     },
-    body: JSON.stringify({ room_name }),
   })
   if (!res.ok) {
     throw new Error( `${res.status}: Unable to retrieve link`)
