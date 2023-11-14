@@ -145,6 +145,7 @@
 
 .alpha-centauri {
   color: white;
+  margin-bottom: 3rem
 }
 
 @media screen and (max-width: 1025px) {
@@ -168,17 +169,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  /* .room {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    grid-template-areas:
-      'clock board'
-      'bike door'
-      'plant desk'
-      'radio lamp';
-  } */
   .room {
     padding: 0rem;
+  }
+
+  .alpha-centauri {
+    padding-left: 1rem
   }
 
   .board,
@@ -257,5 +253,17 @@
       'bike door'
       'plant lamp'
       'desk radio';
+  }
+
+  /* .alpha-centauri {
+    padding-bottom:3rem ;
+  } */
+  .radio {
+    margin-bottom: 3rem;
+    width: 60%
+  }
+  .door, 
+  .lamp {
+    width: 100%;
   }
 }
