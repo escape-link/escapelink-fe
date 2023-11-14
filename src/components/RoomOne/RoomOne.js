@@ -126,24 +126,16 @@ export default function RoomOne() {
     setOpenPopup(null);
   };
 
-  const handleClockClick = () => {
-    handlePopupOpen("puzzleThree");
-  };
+  const puzzles = [
+    { identifier: 'puzzleTwo', image: radio, class: 'radio'},
+    { identifier: 'puzzleOne', image: deskComp, class: 'deskComp'},
+    { identifier: 'puzzleThree', image: clock, class: 'clock' },
+    { identifier: 'puzzleFour', image: plant, class: 'plant' },
+    { identifier: 'puzzleFive', image: bike, class: 'bike'},
+  ];
 
-  const handleDeskCompClick = () => {
-    handlePopupOpen("puzzleOne");
-  };
-
-  const handleRadioClick = () => {
-    handlePopupOpen("puzzleTwo");
-  };
-
-  const handlePlantClick = () => {
-    handlePopupOpen("puzzleFour");
-  };
-
-  const handleBikeClick = () => {
-    handlePopupOpen("puzzleFive");
+  const handlePuzzleClick = (puzzleName) => {
+    handlePopupOpen(puzzleName);
   };
 
   const handleLampClick = () => {
@@ -158,30 +150,22 @@ export default function RoomOne() {
         <article
           className={`room ${lampClicked ? 'invert-colors' : ''}`}
           style={roomStyle}>
-          <button
-            className={`clock-btn ${
-              isDisabled.puzzleThree ? 'disabled' : 'active'
-            }`}
-            onClick={handleClockClick}
-            tabIndex={isDisabled.puzzleThree ? -1 : 0}>
-            <img className="clock" src={clock} alt="clock" />
-          </button>
-          <button
-            className={`plant-btn ${
-              isDisabled.puzzleFour ? 'disabled' : 'active'
-            }`}
-            onClick={handlePlantClick}
-            tabIndex={isDisabled.puzzleFour ? -1 : 0}>
-            <img className="plant" src={plant} alt="plant" />
-          </button>
-          <button
-            className={`bike-btn ${
-              isDisabled.puzzleFive ? 'disabled' : 'active'
-            }`}
-            onClick={handleBikeClick}
-            tabIndex={isDisabled.puzzleFive ? -1 : 0}>
-            <img className="bike" src={bike} alt="bike" />
-          </button>
+             {puzzles.map((puzzle) => (
+            <button
+              key={puzzle.identifier}
+              className={`${puzzle.class}-btn ${
+                isDisabled[puzzle.identifier] ? 'disabled' : 'active'
+              }`}
+              onClick={() => handlePuzzleClick(puzzle.identifier)}
+              tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}
+            >
+              <img
+                className={puzzle.class}
+                src={puzzle.image}
+                alt={puzzle.class}
+              />
+            </button>
+          ))}
           <button className="door-btn" tabIndex={0}>
             <img className="door" src={door} alt="door" />
           </button>
@@ -191,24 +175,8 @@ export default function RoomOne() {
             tabIndex={isCipherVisible ? 0 : -1}>
             <img className="board" src={board} alt="board" />
           </button>
-          <button
-            className={`desk-comp-btn ${
-              isDisabled.puzzleOne ? 'disabled' : 'active'
-            }`}
-            onClick={handleDeskCompClick}
-            tabIndex={0}>
-            <img className="desk-comp" src={deskComp} alt="desk" />
-          </button>
           <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
             <img className="lamp" src={lamp} alt="lamp" />
-          </button>
-          <button
-            className={`radio-btn ${
-              isDisabled.puzzleTwo ? 'disabled' : 'active'
-            }`}
-            onClick={handleRadioClick}
-            tabIndex={isDisabled.puzzleTwo ? -1 : 0}>
-            <img className="radio" src={radio} alt="radio" />
           </button>
           {openPopup === "puzzleOne" && (
             <PuzzleOne
