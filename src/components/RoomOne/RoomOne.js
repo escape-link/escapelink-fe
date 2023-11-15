@@ -44,11 +44,36 @@ export default function RoomOne() {
   };
 
   const puzzles = [
-    { identifier: 'puzzleTwo', image: radio, class: 'radio' },
-    { identifier: 'puzzleOne', image: deskComp, class: 'deskComp' },
-    { identifier: 'puzzleThree', image: clock, class: 'clock' },
-    { identifier: 'puzzleFour', image: plant, class: 'plant' },
-    { identifier: 'puzzleFive', image: bike, class: 'bike' }
+    {
+      identifier: 'puzzleOne',
+      puzzleComponent: PuzzleOne,
+      image: deskComp,
+      class: 'deskComp'
+    },
+    {
+      identifier: 'puzzleTwo',
+      puzzleComponent: PuzzleTwo,
+      image: radio,
+      class: 'radio'
+    },
+    {
+      identifier: 'puzzleThree',
+      puzzleComponent: PuzzleThree,
+      image: clock,
+      class: 'clock'
+    },
+    {
+      identifier: 'puzzleFour',
+      puzzleComponent: PuzzleFour,
+      image: plant,
+      class: 'plant'
+    },
+    {
+      identifier: 'puzzleFive',
+      puzzleComponent: PuzzleFive,
+      image: bike,
+      class: 'bike'
+    }
   ];
 
   useEffect(() => {
@@ -124,16 +149,12 @@ export default function RoomOne() {
     '--room-bg': lampClicked ? 'none' : `url(${blueBackground})`
   };
 
-  const handlePopupOpen = (popupName) => {
-    setOpenPopup(popupName);
-  };
-
   const handlePopupClose = () => {
     setOpenPopup(null);
   };
 
-  const handlePuzzleClick = (puzzleName) => {
-    handlePopupOpen(puzzleName);
+  const handlePuzzleClick = (puzzle) => {
+    setOpenPopup(puzzle.identifier);
   };
 
   const handleLampClick = () => {
@@ -154,7 +175,7 @@ export default function RoomOne() {
               className={`${puzzle.class}-btn ${
                 isDisabled[puzzle.identifier] ? 'disabled' : 'active'
               }`}
-              onClick={() => handlePuzzleClick(puzzle.identifier)}
+              onClick={() => handlePuzzleClick(puzzle)}
               tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}>
               <img
                 className={puzzle.class}
@@ -175,51 +196,20 @@ export default function RoomOne() {
           <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
-          {openPopup === 'puzzleOne' && (
-            <PuzzleOne
-              setIsDisabled={() => setPuzzleState('puzzleOne')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleTwo' && (
-            <PuzzleTwo
-              setIsDisabled={() => setPuzzleState('puzzleTwo')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleThree' && (
-            <PuzzleThree
-              setIsDisabled={() => setPuzzleState('puzzleThree')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleFour' && (
-            <PuzzleFour
-              setIsDisabled={() => setPuzzleState('puzzleFour')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleFive' && (
-            <PuzzleFive
-              setIsDisabled={() => setPuzzleState('puzzleFive')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
+          {openPopup &&
+            puzzles.map(
+              (puzzle) =>
+                puzzle.identifier === openPopup && (
+                  <puzzle.puzzleComponent
+                    key={puzzle.identifier}
+                    setIsDisabled={() => setPuzzleState(puzzle.identifier)}
+                    winConditions={winConditions}
+                    setWinConditions={setWinConditions}
+                    onClose={handlePopupClose}
+                    puzzleCompleted={puzzleCompleted}
+                  />
+                )
+            )}
           <Chat
             backendData={backendData}
             allMessages={allMessages}
