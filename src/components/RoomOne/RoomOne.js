@@ -43,8 +43,18 @@ export default function RoomOne() {
     setIsCipherVisible(!isCipherVisible);
   };
 
+  const puzzles = [
+    { identifier: 'puzzleTwo', image: radio, class: 'radio' },
+    { identifier: 'puzzleOne', image: deskComp, class: 'deskComp' },
+    { identifier: 'puzzleThree', image: clock, class: 'clock' },
+    { identifier: 'puzzleFour', image: plant, class: 'plant' },
+    { identifier: 'puzzleFive', image: bike, class: 'bike' }
+  ];
+
   useEffect(() => {
-    const cable = createConsumer('wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable');
+    const cable = createConsumer(
+      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
+    );
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: backendData },
       {
@@ -61,21 +71,18 @@ export default function RoomOne() {
       { channel: 'DataChannel', game_name: backendData },
       {
         received: (data) => {
-          if (data.puzzle_identifier === 1) {
-            setPuzzleState('puzzleOne');
+          const puzzleNum = {
+            1: 'puzzleOne',
+            2: 'puzzleTwo',
+            3: 'puzzleThree',
+            4: 'puzzleFour',
+            5: 'puzzleFive'
+          };
+
+          if (puzzleNum[data.puzzle_identifier]) {
+            setPuzzleState(puzzleNum[data.puzzle_identifier]);
           }
-          if (data.puzzle_identifier === 2) {
-            setPuzzleState('puzzleTwo');
-          }
-          if (data.puzzle_identifier === 3) {
-            setPuzzleState('puzzleThree');
-          }
-          if (data.puzzle_identifier === 4) {
-            setPuzzleState('puzzleFour');
-          }
-          if (data.puzzle_identifier === 5) {
-            setPuzzleState('puzzleFive');
-          }
+
           if (data.game_over) {
             setShowVictoryPage(true);
           }
@@ -99,7 +106,6 @@ export default function RoomOne() {
     });
   };
 
-
   useEffect(() => {
     if (winConditions.length === 5) {
       dataSubscription.send({ game_over: true });
@@ -115,7 +121,7 @@ export default function RoomOne() {
   };
 
   const roomStyle = {
-    "--room-bg": lampClicked ? "none" : `url(${blueBackground})`,
+    '--room-bg': lampClicked ? 'none' : `url(${blueBackground})`
   };
 
   const handlePopupOpen = (popupName) => {
@@ -125,14 +131,6 @@ export default function RoomOne() {
   const handlePopupClose = () => {
     setOpenPopup(null);
   };
-
-  const puzzles = [
-    { identifier: 'puzzleTwo', image: radio, class: 'radio'},
-    { identifier: 'puzzleOne', image: deskComp, class: 'deskComp'},
-    { identifier: 'puzzleThree', image: clock, class: 'clock' },
-    { identifier: 'puzzleFour', image: plant, class: 'plant' },
-    { identifier: 'puzzleFive', image: bike, class: 'bike'},
-  ];
 
   const handlePuzzleClick = (puzzleName) => {
     handlePopupOpen(puzzleName);
@@ -150,15 +148,14 @@ export default function RoomOne() {
         <article
           className={`room ${lampClicked ? 'invert-colors' : ''}`}
           style={roomStyle}>
-             {puzzles.map((puzzle) => (
+          {puzzles.map((puzzle) => (
             <button
               key={puzzle.identifier}
               className={`${puzzle.class}-btn ${
                 isDisabled[puzzle.identifier] ? 'disabled' : 'active'
               }`}
               onClick={() => handlePuzzleClick(puzzle.identifier)}
-              tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}
-            >
+              tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}>
               <img
                 className={puzzle.class}
                 src={puzzle.image}
@@ -178,7 +175,7 @@ export default function RoomOne() {
           <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
-          {openPopup === "puzzleOne" && (
+          {openPopup === 'puzzleOne' && (
             <PuzzleOne
               setIsDisabled={() => setPuzzleState('puzzleOne')}
               winConditions={winConditions}
@@ -187,7 +184,7 @@ export default function RoomOne() {
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {openPopup === "puzzleTwo" && (
+          {openPopup === 'puzzleTwo' && (
             <PuzzleTwo
               setIsDisabled={() => setPuzzleState('puzzleTwo')}
               winConditions={winConditions}
@@ -196,7 +193,7 @@ export default function RoomOne() {
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {openPopup === "puzzleThree" && (
+          {openPopup === 'puzzleThree' && (
             <PuzzleThree
               setIsDisabled={() => setPuzzleState('puzzleThree')}
               winConditions={winConditions}
@@ -205,7 +202,7 @@ export default function RoomOne() {
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {openPopup === "puzzleFour" && (
+          {openPopup === 'puzzleFour' && (
             <PuzzleFour
               setIsDisabled={() => setPuzzleState('puzzleFour')}
               winConditions={winConditions}
@@ -214,7 +211,7 @@ export default function RoomOne() {
               puzzleCompleted={puzzleCompleted}
             />
           )}
-          {openPopup === "puzzleFive" && (
+          {openPopup === 'puzzleFive' && (
             <PuzzleFive
               setIsDisabled={() => setPuzzleState('puzzleFive')}
               winConditions={winConditions}
