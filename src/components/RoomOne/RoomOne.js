@@ -43,8 +43,43 @@ export default function RoomOne() {
     setIsCipherVisible(!isCipherVisible);
   };
 
+  const puzzles = [
+    {
+      identifier: 'puzzleOne',
+      puzzleComponent: PuzzleOne,
+      image: deskComp,
+      class: 'deskComp'
+    },
+    {
+      identifier: 'puzzleTwo',
+      puzzleComponent: PuzzleTwo,
+      image: radio,
+      class: 'radio'
+    },
+    {
+      identifier: 'puzzleThree',
+      puzzleComponent: PuzzleThree,
+      image: clock,
+      class: 'clock'
+    },
+    {
+      identifier: 'puzzleFour',
+      puzzleComponent: PuzzleFour,
+      image: plant,
+      class: 'plant'
+    },
+    {
+      identifier: 'puzzleFive',
+      puzzleComponent: PuzzleFive,
+      image: bike,
+      class: 'bike'
+    }
+  ];
+
   useEffect(() => {
-    const cable = createConsumer('wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable');
+    const cable = createConsumer(
+      'wss://escapelink-be-42ffc95e6cf7.herokuapp.com/cable'
+    );
     const newSubscription = cable.subscriptions.create(
       { channel: 'GameChannel', room: backendData },
       {
@@ -61,21 +96,18 @@ export default function RoomOne() {
       { channel: 'DataChannel', game_name: backendData },
       {
         received: (data) => {
-          if (data.puzzle_identifier === 1) {
-            setPuzzleState('puzzleOne');
+          const puzzleNum = {
+            1: 'puzzleOne',
+            2: 'puzzleTwo',
+            3: 'puzzleThree',
+            4: 'puzzleFour',
+            5: 'puzzleFive'
+          };
+
+          if (puzzleNum[data.puzzle_identifier]) {
+            setPuzzleState(puzzleNum[data.puzzle_identifier]);
           }
-          if (data.puzzle_identifier === 2) {
-            setPuzzleState('puzzleTwo');
-          }
-          if (data.puzzle_identifier === 3) {
-            setPuzzleState('puzzleThree');
-          }
-          if (data.puzzle_identifier === 4) {
-            setPuzzleState('puzzleFour');
-          }
-          if (data.puzzle_identifier === 5) {
-            setPuzzleState('puzzleFive');
-          }
+
           if (data.game_over) {
             setShowVictoryPage(true);
           }
@@ -99,7 +131,6 @@ export default function RoomOne() {
     });
   };
 
-
   useEffect(() => {
     if (winConditions.length === 5) {
       dataSubscription.send({ game_over: true });
@@ -115,35 +146,15 @@ export default function RoomOne() {
   };
 
   const roomStyle = {
-    "--room-bg": lampClicked ? "none" : `url(${blueBackground})`,
-  };
-
-  const handlePopupOpen = (popupName) => {
-    setOpenPopup(popupName);
+    '--room-bg': lampClicked ? 'none' : `url(${blueBackground})`
   };
 
   const handlePopupClose = () => {
     setOpenPopup(null);
   };
 
-  const handleClockClick = () => {
-    handlePopupOpen("puzzleThree");
-  };
-
-  const handleDeskCompClick = () => {
-    handlePopupOpen("puzzleOne");
-  };
-
-  const handleRadioClick = () => {
-    handlePopupOpen("puzzleTwo");
-  };
-
-  const handlePlantClick = () => {
-    handlePopupOpen("puzzleFour");
-  };
-
-  const handleBikeClick = () => {
-    handlePopupOpen("puzzleFive");
+  const handlePuzzleClick = (puzzle) => {
+    setOpenPopup(puzzle.identifier);
   };
 
   const handleLampClick = () => {
@@ -158,30 +169,21 @@ export default function RoomOne() {
         <article
           className={`room ${lampClicked ? 'invert-colors' : ''}`}
           style={roomStyle}>
-          <button
-            className={`clock-btn ${
-              isDisabled.puzzleThree ? 'disabled' : 'active'
-            }`}
-            onClick={handleClockClick}
-            tabIndex={isDisabled.puzzleThree ? -1 : 0}>
-            <img className="clock" src={clock} alt="clock" />
-          </button>
-          <button
-            className={`plant-btn ${
-              isDisabled.puzzleFour ? 'disabled' : 'active'
-            }`}
-            onClick={handlePlantClick}
-            tabIndex={isDisabled.puzzleFour ? -1 : 0}>
-            <img className="plant" src={plant} alt="plant" />
-          </button>
-          <button
-            className={`bike-btn ${
-              isDisabled.puzzleFive ? 'disabled' : 'active'
-            }`}
-            onClick={handleBikeClick}
-            tabIndex={isDisabled.puzzleFive ? -1 : 0}>
-            <img className="bike" src={bike} alt="bike" />
-          </button>
+          {puzzles.map((puzzle) => (
+            <button
+              key={puzzle.identifier}
+              className={`${puzzle.class}-btn ${
+                isDisabled[puzzle.identifier] ? 'disabled' : 'active'
+              }`}
+              onClick={() => handlePuzzleClick(puzzle)}
+              tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}>
+              <img
+                className={puzzle.class}
+                src={puzzle.image}
+                alt={puzzle.class}
+              />
+            </button>
+          ))}
           <button className="door-btn" tabIndex={0}>
             <img className="door" src={door} alt="door" />
           </button>
@@ -191,70 +193,23 @@ export default function RoomOne() {
             tabIndex={isCipherVisible ? 0 : -1}>
             <img className="board" src={board} alt="board" />
           </button>
-          <button
-            className={`desk-comp-btn ${
-              isDisabled.puzzleOne ? 'disabled' : 'active'
-            }`}
-            onClick={handleDeskCompClick}
-            tabIndex={0}>
-            <img className="desk-comp" src={deskComp} alt="desk" />
-          </button>
           <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
             <img className="lamp" src={lamp} alt="lamp" />
           </button>
-          <button
-            className={`radio-btn ${
-              isDisabled.puzzleTwo ? 'disabled' : 'active'
-            }`}
-            onClick={handleRadioClick}
-            tabIndex={isDisabled.puzzleTwo ? -1 : 0}>
-            <img className="radio" src={radio} alt="radio" />
-          </button>
-          {openPopup === "puzzleOne" && (
-            <PuzzleOne
-              setIsDisabled={() => setPuzzleState('puzzleOne')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === "puzzleTwo" && (
-            <PuzzleTwo
-              setIsDisabled={() => setPuzzleState('puzzleTwo')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === "puzzleThree" && (
-            <PuzzleThree
-              setIsDisabled={() => setPuzzleState('puzzleThree')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === "puzzleFour" && (
-            <PuzzleFour
-              setIsDisabled={() => setPuzzleState('puzzleFour')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === "puzzleFive" && (
-            <PuzzleFive
-              setIsDisabled={() => setPuzzleState('puzzleFive')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
+          {openPopup &&
+            puzzles.map(
+              (puzzle) =>
+                puzzle.identifier === openPopup && (
+                  <puzzle.puzzleComponent
+                    key={puzzle.identifier}
+                    setIsDisabled={() => setPuzzleState(puzzle.identifier)}
+                    winConditions={winConditions}
+                    setWinConditions={setWinConditions}
+                    onClose={handlePopupClose}
+                    puzzleCompleted={puzzleCompleted}
+                  />
+                )
+            )}
           <Chat
             backendData={backendData}
             allMessages={allMessages}
