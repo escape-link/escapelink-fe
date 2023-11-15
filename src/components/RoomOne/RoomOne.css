@@ -145,7 +145,7 @@
 
 .alpha-centauri {
   color: white;
-  margin-bottom: 3rem
+  margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 1025px) {
@@ -164,7 +164,7 @@
     width: 55%;
   }
   .radio {
-    width: 80%
+    width: 80%;
   }
 }
 
@@ -174,7 +174,7 @@
   }
 
   .alpha-centauri {
-    padding-left: 1rem
+    padding-left: 1rem;
   }
 
   .board,
@@ -254,15 +254,11 @@
       'plant lamp'
       'desk radio';
   }
-
-  /* .alpha-centauri {
-    padding-bottom:3rem ;
-  } */
   .radio {
     margin-bottom: 3rem;
-    width: 60%
+    width: 60%;
   }
-  .door, 
+  .door,
   .lamp {
     width: 100%;
   }
