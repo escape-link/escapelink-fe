@@ -4,7 +4,7 @@ const getCookie = (name) => {
   if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
-export default async function fetchGameLink() {
+export async function fetchGameLink() {
   const room_name = "Where's Bob?"; 
   const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
     method: 'POST',
@@ -17,6 +17,15 @@ export default async function fetchGameLink() {
   })
   if (!res.ok) {
     throw new Error( `${res.status}: Unable to retrieve link`)
+  }
+  const data = await res.json()
+  return data
+}
+
+export async function fetchLeaderboard() {
+  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/leaderboards?room_id=1')
+  if (!res.ok) {
+    throw new Error(`${res.status}: Unable to retrieve leaderboard`)
   }
   const data = await res.json()
   return data

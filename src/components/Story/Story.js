@@ -1,7 +1,7 @@
 import './Story.css';
 import background from '../../assets/big-donut.jpg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import fetchGameLink from '../../apiCalls';
+import {fetchGameLink, fetchLeaderboard} from '../../apiCalls';
 
 export default function Story() {
   const navigate = useNavigate();
@@ -15,6 +15,18 @@ export default function Story() {
       console.log(`${err.message}`);
     }
   };
+
+  useEffect(() => {
+    const getLeaderboard = async () => {
+      try {
+        const leaderboardData = await fetchLeaderboard()
+        setScores(leaderboardData)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getLeaderboard()
+  }, [])
 
   return (
     <section className='story-body' style={{ '--background': `url(${background})` }}>
