@@ -6,8 +6,8 @@
 .room {
   background-image: var(--room-bg);
   background-size: cover;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   display: grid;
   padding: 0 2%;
   grid-template-columns: repeat(5, 1fr);
@@ -145,6 +145,7 @@
 
 .alpha-centauri {
   color: white;
+  margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 1025px) {
@@ -167,23 +168,51 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  /* .room {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+@media screen and (max-height: 585px) {
+  .board {
+    width: 80%;
+  }
+  .lamp {
+    width: 110%;
+  }
+  .radio {
+    width: 70%
+  }
+  .door {
+    width: 60%;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .room {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-template-areas:
-      'clock board'
-      'bike door'
-      'plant desk'
-      'radio lamp';
-  } */
+      'clock board board board lamp'
+      'bike door door desk radio'
+      'plant door door desk radio ';
+  }
+  .board {
+    width: 70%;
+  }
+
+  .radio {
+    margin-bottom: 0rem;
+  }
+  .door {
+    width: 50%;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+
   .room {
     padding: 0rem;
   }
 
   .board,
   .clock,
-  .radio,
   .plant,
   .bike {
     width: 90%;
@@ -192,8 +221,12 @@
   .desk-comp {
     width: 50%;
   }
-  .lamp {
-    width: 140%;
+
+}
+
+@media screen and (max-height: 300px) {
+  .board {
+    width: 70%;
   }
 }
 
