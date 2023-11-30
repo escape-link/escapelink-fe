@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './PuzzleTwo.css';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,13 @@ export default function PuzzleTwo({
 }) {
   const [answer, setAnswer] = useState('');
   const [incorrect, setIncorrect] = useState('');
+  const modalRef = useRef();
+
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, []);
 
   const handleChange = (e) => {
     setIncorrect('');
@@ -20,26 +27,28 @@ export default function PuzzleTwo({
   const handleSubmit = () => {
     if (answer === '94.5') {
       setWinConditions([...winConditions, answer]);
-      puzzleCompleted(2)
+      puzzleCompleted(2);
       onClose();
-      setIsDisabled()
+      setIsDisabled();
     } else {
       setIncorrect('Incorrect: Please try again');
     }
   };
 
-
   return (
-    <div className="popup">
-      <p>{incorrect}</p>
-      <h2>Radio Frequency: Tune to the correct station.</h2>
-      <p>The first digit of the radio station is the second digit of the year of the
-        year area 51 was founded. The second is the only number whose English
-        name has the same number of letters as its value. For the last digit,
-        which follows a decimal point, look for the Leo constellation and figure
-        its placement within the zodiac calendar.
+    <div tabIndex="-1" ref={modalRef} className="popup">
+      <p role="alert">{incorrect}</p>
+      <h1 tabIndex="0">Radio Frequency: Tune to the correct station.</h1>
+      <p tabIndex="0">
+        The first digit of the radio station is the second digit of the year of
+        the year area 51 was founded. The second is the only number whose
+        English name has the same number of letters as its value. For the last
+        digit, which follows a decimal point, look for the Leo constellation and
+        figure its placement within the zodiac calendar.
       </p>
+      <label htmlFor="answer" />
       <input
+        id="answer"
         type="text"
         value={answer}
         onChange={handleChange}
@@ -55,5 +64,5 @@ PuzzleTwo.propTypes = {
   onClose: PropTypes.func.isRequired,
   winConditions: PropTypes.array.isRequired,
   setWinConditions: PropTypes.func.isRequired,
-  setIsDisabled: PropTypes.func.isRequired,
+  setIsDisabled: PropTypes.func.isRequired
 };
