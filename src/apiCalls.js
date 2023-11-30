@@ -4,29 +4,32 @@ const getCookie = (name) => {
   if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
-export async function fetchGameLink() {
-  const room_name = "Where's Bob?"; 
-  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': getCookie('X-CSRF-Token')
-    },
-    body: JSON.stringify({ room_name }),
-  })
+export async function fetchGameLink(roomName) {
+  const res = await fetch(
+    `https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/games?room_name=${roomName}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': getCookie('X-CSRF-Token')
+      }
+    }
+  );
   if (!res.ok) {
-    throw new Error( `${res.status}: Unable to retrieve link`)
+    throw new Error(`${res.status}: Unable to retrieve link`);
   }
-  const data = await res.json()
-  return data
+  const data = await res.json();
+  return data;
 }
 
 export async function fetchLeaderboard() {
-  const res = await fetch('https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/leaderboards?room_id=1')
+  const res = await fetch(
+    'https://escapelink-be-42ffc95e6cf7.herokuapp.com/api/v0/leaderboards?room_id=1'
+  );
   if (!res.ok) {
-    throw new Error(`${res.status}: Unable to retrieve leaderboard`)
+    throw new Error(`${res.status}: Unable to retrieve leaderboard`);
   }
-  const data = await res.json()
-  return data
+  const data = await res.json();
+  return data;
 }

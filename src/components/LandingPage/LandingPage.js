@@ -3,18 +3,25 @@ import { useNavigate} from 'react-router-dom';
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  let displayedRoomName = '';
+  // let displayedRoomName = '';
+
+  // const goToRoom = (roomName) => {
+  //   displayedRoomName = roomName;
+  //   navigate(`room/${displayedRoomName}` );
+  // };
+
 
   const goToRoom = (roomName) => {
-    displayedRoomName = roomName;
+    const displayedRoomName = encodeURIComponent(roomName);
     navigate(`room/${displayedRoomName}` );
   };
+
 
   return (
     <div className="landing-page">
       <h2 className='welcome'>Choose your room!</h2>
       <div className="buttons">
-        <button onClick={() => goToRoom('wheres-bob')} className="room-one">Alien Escape!</button>
+        <button onClick={() => goToRoom('Where\'s Bob?')} className="room-one">Alien Escape!</button>
           <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
           <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
           <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
