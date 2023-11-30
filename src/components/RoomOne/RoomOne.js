@@ -20,6 +20,7 @@ import Cipher from '../Cipher/Cipher';
 import Chat from '../Chat/Chat';
 import { createConsumer } from '@rails/actioncable';
 import { useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 export default function RoomOne() {
   const [openPopup, setOpenPopup] = useState(null);
@@ -38,6 +39,40 @@ export default function RoomOne() {
   const [allMessages, setAllMessages] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [dataSubscription, setDataSubscription] = useState(null);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+  const roomImages = [
+    blueBackground,
+    clock,
+    plant,
+    door,
+    board,
+    radio,
+    lamp,
+    deskComp,
+    bike
+  ];
+
+  useEffect(() => {
+    const loadImage = (image) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = image;
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error(`Failed to load ${image}`));
+      });
+    };
+
+    const loadAllImages = async () => {
+      try {
+        await Promise.all(roomImages.map(loadImage));
+        setAllImagesLoaded(true);
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
+    };
+
+    loadAllImages();
+  }, [roomImages]);
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
@@ -153,123 +188,132 @@ export default function RoomOne() {
 
   return (
     <div>
-      {showVictoryPage ? (
-        <VictoryPage />
+      {!allImagesLoaded ? (
+        <Loading />
       ) : (
-        <article
-          className={`room ${lampClicked ? 'invert-colors' : ''}`}
-          style={roomStyle}>
-          <button
-            className={`clock-btn ${
-              isDisabled.puzzleThree ? 'disabled' : 'active'
-            }`}
-            onClick={handleClockClick}
-            tabIndex={isDisabled.puzzleThree ? -1 : 0}>
-            <img className="clock" src={clock} alt="clock" />
-          </button>
-          <button
-            className={`bike-btn ${
-              isDisabled.puzzleFive ? 'disabled' : 'active'
-            }`}
-            onClick={handleBikeClick}
-            tabIndex={isDisabled.puzzleFive ? -1 : 0}>
-            <img className="bike" src={bike} alt="bike" />
-          </button>
-          <button
-            className={`plant-btn ${
-              isDisabled.puzzleFour ? 'disabled' : 'active'
-            }`}
-            onClick={handlePlantClick}
-            tabIndex={isDisabled.puzzleFour ? -1 : 0}>
-            <img className="plant" src={plant} alt="plant" />
-          </button>
-          <button className="door-btn" tabIndex={0}>
-            <img className="door" src={door} alt="door" />
-          </button>
-          <button
-            className="board-btn"
-            onClick={toggleCipherVisibility}
-            tabIndex={isCipherVisible ? -1 : 0}>
-            <img className="board" src={board} alt="board" />
-          </button>
-          <button
-            className={`desk-comp-btn ${
-              isDisabled.puzzleOne ? 'disabled' : 'active'
-            }`}
-            onClick={handleDeskCompClick}
-            tabIndex={isDisabled.puzzleOne ? -1 : 0}>
-            <img className="desk-comp" src={deskComp} alt="desk" />
-          </button>
-          <button className="lamp-btn" onClick={handleLampClick} tabIndex={0}>
-            <img className="lamp" src={lamp} alt="lamp" />
-          </button>
-          <button
-            className={`radio-btn ${
-              isDisabled.puzzleTwo ? 'disabled' : 'active'
-            }`}
-            onClick={handleRadioClick}
-            tabIndex={isDisabled.puzzleTwo ? -1 : 0}>
-            <img className="radio" src={radio} alt="radio" />
-          </button>
-          {openPopup === 'puzzleOne' && (
-            <PuzzleOne
-              setIsDisabled={() => setPuzzleState('puzzleOne')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
+        <>
+          {showVictoryPage ? (
+            <VictoryPage />
+          ) : (
+            <article
+              className={`room ${lampClicked ? 'invert-colors' : ''}`}
+              style={roomStyle}>
+              <button
+                className={`clock-btn ${
+                  isDisabled.puzzleThree ? 'disabled' : 'active'
+                }`}
+                onClick={handleClockClick}
+                tabIndex={isDisabled.puzzleThree ? -1 : 0}>
+                <img className="clock" src={clock} alt="clock" />
+              </button>
+              <button
+                className={`bike-btn ${
+                  isDisabled.puzzleFive ? 'disabled' : 'active'
+                }`}
+                onClick={handleBikeClick}
+                tabIndex={isDisabled.puzzleFive ? -1 : 0}>
+                <img className="bike" src={bike} alt="bike" />
+              </button>
+              <button
+                className={`plant-btn ${
+                  isDisabled.puzzleFour ? 'disabled' : 'active'
+                }`}
+                onClick={handlePlantClick}
+                tabIndex={isDisabled.puzzleFour ? -1 : 0}>
+                <img className="plant" src={plant} alt="plant" />
+              </button>
+              <button className="door-btn" tabIndex={0}>
+                <img className="door" src={door} alt="door" />
+              </button>
+              <button
+                className="board-btn"
+                onClick={toggleCipherVisibility}
+                tabIndex={isCipherVisible ? -1 : 0}>
+                <img className="board" src={board} alt="board" />
+              </button>
+              <button
+                className={`desk-comp-btn ${
+                  isDisabled.puzzleOne ? 'disabled' : 'active'
+                }`}
+                onClick={handleDeskCompClick}
+                tabIndex={isDisabled.puzzleOne ? -1 : 0}>
+                <img className="desk-comp" src={deskComp} alt="desk" />
+              </button>
+              <button
+                className="lamp-btn"
+                onClick={handleLampClick}
+                tabIndex={0}>
+                <img className="lamp" src={lamp} alt="lamp" />
+              </button>
+              <button
+                className={`radio-btn ${
+                  isDisabled.puzzleTwo ? 'disabled' : 'active'
+                }`}
+                onClick={handleRadioClick}
+                tabIndex={isDisabled.puzzleTwo ? -1 : 0}>
+                <img className="radio" src={radio} alt="radio" />
+              </button>
+              {openPopup === 'puzzleOne' && (
+                <PuzzleOne
+                  setIsDisabled={() => setPuzzleState('puzzleOne')}
+                  winConditions={winConditions}
+                  setWinConditions={setWinConditions}
+                  onClose={handlePopupClose}
+                  puzzleCompleted={puzzleCompleted}
+                />
+              )}
+              {openPopup === 'puzzleTwo' && (
+                <PuzzleTwo
+                  setIsDisabled={() => setPuzzleState('puzzleTwo')}
+                  winConditions={winConditions}
+                  setWinConditions={setWinConditions}
+                  onClose={handlePopupClose}
+                  puzzleCompleted={puzzleCompleted}
+                />
+              )}
+              {openPopup === 'puzzleThree' && (
+                <PuzzleThree
+                  setIsDisabled={() => setPuzzleState('puzzleThree')}
+                  winConditions={winConditions}
+                  setWinConditions={setWinConditions}
+                  onClose={handlePopupClose}
+                  puzzleCompleted={puzzleCompleted}
+                />
+              )}
+              {openPopup === 'puzzleFour' && (
+                <PuzzleFour
+                  setIsDisabled={() => setPuzzleState('puzzleFour')}
+                  winConditions={winConditions}
+                  setWinConditions={setWinConditions}
+                  onClose={handlePopupClose}
+                  puzzleCompleted={puzzleCompleted}
+                />
+              )}
+              {openPopup === 'puzzleFive' && (
+                <PuzzleFive
+                  setIsDisabled={() => setPuzzleState('puzzleFive')}
+                  winConditions={winConditions}
+                  setWinConditions={setWinConditions}
+                  onClose={handlePopupClose}
+                  puzzleCompleted={puzzleCompleted}
+                />
+              )}
+              <Chat
+                backendData={backendData}
+                allMessages={allMessages}
+                subscription={subscription}
+              />
+              {roomStyle['--room-bg'] === 'none' && (
+                <span tabIndex={0} className="alpha-centauri">
+                  ⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟
+                </span>
+              )}
+            </article>
           )}
-          {openPopup === 'puzzleTwo' && (
-            <PuzzleTwo
-              setIsDisabled={() => setPuzzleState('puzzleTwo')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleThree' && (
-            <PuzzleThree
-              setIsDisabled={() => setPuzzleState('puzzleThree')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleFour' && (
-            <PuzzleFour
-              setIsDisabled={() => setPuzzleState('puzzleFour')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          {openPopup === 'puzzleFive' && (
-            <PuzzleFive
-              setIsDisabled={() => setPuzzleState('puzzleFive')}
-              winConditions={winConditions}
-              setWinConditions={setWinConditions}
-              onClose={handlePopupClose}
-              puzzleCompleted={puzzleCompleted}
-            />
-          )}
-          <Chat
-            backendData={backendData}
-            allMessages={allMessages}
-            subscription={subscription}
-          />
-          {roomStyle['--room-bg'] === 'none' && (
-            <span tabIndex={0} className="alpha-centauri">
-              ⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟
-            </span>
-          )}
-        </article>
-      )}
 
-      {isCipherVisible && <Cipher onClose={toggleCipherVisibility} />}
+          {isCipherVisible && <Cipher onClose={toggleCipherVisibility} />}
+        </>
+      )}
     </div>
   );
 }
