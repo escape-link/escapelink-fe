@@ -20,7 +20,7 @@ header {
   box-shadow: inset 20px 20px 40px rgb(29 180 216 / 10%);
 }
 
-h1 {
+.header-text {
   size: 3em;
   color: #edf9ff;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
