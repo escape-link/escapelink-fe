@@ -15,10 +15,10 @@ export default function LandingPage() {
       <h2 className='welcome'>Choose your room!</h2>
       <div className="buttons">
         <button onClick={() => goToRoom('wheres-bob')} className="room-one">Alien Escape!</button>
-        <button className='coming-soon'>Coming Soon</button>
-        <button className='coming-soon'>Coming Soon</button>
-        <button className='coming-soon'>Coming Soon</button>
-        <button className='coming-soon'>Coming Soon</button>
+          <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
+          <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
+          <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
+          <button aria-disabled='true' className='coming-soon'>Coming Soon</button>
       </div>
     </div>
   );
