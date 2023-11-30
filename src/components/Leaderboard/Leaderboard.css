@@ -1,0 +1,101 @@
+.leaderboard {
+  color: black;
+  text-align: center;
+  text-shadow: 2px 0 #c0c4d7, -2px 0 #c0c4d7, 0 2px #c0c4d7, 0 -2px #c0c4d7,
+    1px 1px #c0c4d7, -1px -1px #c0c4d7, 1px -1px #c0c4d7, -1px 1px #c0c4d7;
+  padding: 0.5em;
+  font-size: 3em;
+  margin-top: -0.5em;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard-list li {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid black;
+  margin-bottom: 1em;
+}
+
+.leaderboard-list div {
+  padding: 0.5em;
+}
+
+.leaderboard-header {
+  font-size: 1.5em;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.leaderboard-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  padding: 0 2em 0.5em;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 3px solid black;
+  z-index: 1000;
+  max-width: 90%;
+  max-height: 95%;
+  overflow: auto;
+}
+
+.exit {
+  border: none;
+  background: none;
+  margin-left: -2em;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .leaderboard-container {
+    max-width: 600px;
+    width: 80%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .leaderboard {
+    font-size: 1.5em;
+  }
+  .leaderboard-header {
+    font-size: 1.3em;
+  }
+
+  .leaderboard-list {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .leaderboard-container {
+    max-width: 300px;
+    width: 80%;
+    padding: 0 1em 0.5em;
+  }
+
+  .leaderboard {
+    font-size: 1.3em;
+  }
+
+  .leaderboard-header {
+    font-size: 1em;
+  }
+
+  .leaderboard-list {
+    font-size: 0.75em;
+  }
+
+  .exit {
+    margin-left: -1rem;
+  }
+}
