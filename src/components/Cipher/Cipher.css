@@ -45,10 +45,44 @@
   .popup button:last-child {
     margin-right: 0;
     background-color: #ccc;
-    color: #333;
+    color: #181717;
   }
   
   .popup button:hover {
     background-color: #0056b3;
+  }
+
+  .popup button:last-child:hover {
+    background-color: rgb(177, 173, 173);
+  }
+  
+  @media screen and (max-width: 600px) {
+    .popup {
+      max-width: 600px;
+      width: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 300px) {
+    .popup {
+      max-width: 300px;
+      width: 80%;
+    }
+  
+    .popup h2 {
+      font-size: 1.3em;
+    }
+  
+    .popup p {
+      font-size: 1.1em;
+    }
+  
+    .popup input[type='text'] {
+      font-size: 0.9em;
+    }
+  
+    .popup button {
+      font-size: 0.9em;
+    }
   }
   
