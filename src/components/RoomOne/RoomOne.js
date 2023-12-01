@@ -41,6 +41,7 @@ export default function RoomOne() {
   const [dataSubscription, setDataSubscription] = useState(null);
 
   const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
   const roomImages = [
     blueBackground,
     clock,
@@ -73,7 +74,7 @@ export default function RoomOne() {
     };
 
     loadAllImages();
-  }, []);
+  });
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
@@ -259,7 +260,9 @@ export default function RoomOne() {
                 subscription={subscription}
               />
               {roomStyle['--room-bg'] === 'none' && (
-                <span tabIndex='0' className="alpha-centauri">⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟</span>
+                <span tabIndex="0" className="alpha-centauri">
+                  ⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟
+                </span>
               )}
             </article>
           )}
