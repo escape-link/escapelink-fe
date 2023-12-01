@@ -178,28 +178,74 @@
   }
 }
 
+@media screen and (max-height: 585px) {
+  .board {
+    width: 80%;
+  }
+  .lamp {
+    width: 110%;
+  }
+  .radio {
+    width: 70%
+  }
+  .door {
+    width: 60%;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .room {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      'clock board board board lamp'
+      'bike door door desk radio'
+      'plant door door desk radio ';
+  }
+  .board {
+    width: 70%;
+  }
+
+  .radio {
+    margin-bottom: 0rem;
+  }
+  .door {
+    width: 50%;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
+
   .room {
     padding: 0rem;
   }
-
-  .alpha-centauri {
-    padding-left: 1rem;
-  }
-
-  .board,
+  
   .clock,
-  .radio,
   .plant,
   .bike {
     width: 90%;
   }
 
-  .deskComp {
+  .desk-comp {
     width: 50%;
   }
+
+}
+
+@media screen and (max-height: 300px) {
+  .board {
+    margin-top: .5rem;
+    width: 60%;
+  }
   .lamp {
-    width: 140%;
+    width: 85%;
+  }
+  .radio {
+    width: 60%
+  }
+  .alpha-centauri {
+    margin-bottom: 4rem;
   }
 }
 
