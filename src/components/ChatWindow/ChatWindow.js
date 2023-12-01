@@ -9,9 +9,10 @@ export default function ChatWindow({
 }) {
   const messagesToAdd = allMessages.map((message, index) => (
     <div key={index} className="popout-chat">
-      <p>{message}</p>
+      <p tabIndex='0'>{message}</p>
+      <span role ='alert' className='sr-only'>{message}</span>
     </div>
-  ));
+  )); 
 
   return (
     <div className="messages-container">
