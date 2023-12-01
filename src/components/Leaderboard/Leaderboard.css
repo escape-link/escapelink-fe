@@ -50,6 +50,11 @@
   overflow: auto;
 }
 
+.loading {
+  width: 40em;
+  height: 45em;
+}
+
 .exit {
   border: none;
   background: none;

@@ -23,7 +23,7 @@
 .door-btn,
 .bike-btn,
 .board-btn,
-.desk-comp-btn,
+.deskComp-btn,
 .radio-btn,
 .lamp-btn {
   border: none;
@@ -41,7 +41,7 @@
 .door-btn:hover,
 .bike-btn:hover,
 .board-btn:hover,
-.desk-comp-btn:hover,
+.deskComp-btn:hover,
 .radio-btn:hover,
 .lamp-btn:hover {
   transform: scale(0.95);
@@ -49,7 +49,7 @@
 }
 
 .clock-btn.disabled,
-.desk-comp-btn.disabled,
+.deskComp-btn.disabled,
 .plant-btn.disabled,
 .door-btn.disabled,
 .bike-btn.disabled,
@@ -101,7 +101,7 @@
   max-width: 40em;
 }
 
-.desk-comp-btn {
+.deskComp-btn {
   grid-area: desk;
   display: flex;
   align-items: center;
@@ -124,7 +124,7 @@
 
 .clock,
 .radio,
-.desk-comp,
+.deskComp,
 .plant,
 .bike,
 .door {
@@ -160,73 +160,36 @@
   .door {
     width: 70%;
   }
-  .desk-comp {
+  .deskComp {
     width: 55%;
   }
   .radio {
-    width: 80%
-  }
-}
-
-@media screen and (max-height: 585px) {
-  .board {
     width: 80%;
   }
-  .lamp {
-    width: 110%;
-  }
-  .radio {
-    width: 70%
-  }
-  .door {
-    width: 60%;
-  }
 }
-
-@media screen and (max-height: 480px) {
-  .room {
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas:
-      'clock board board board lamp'
-      'bike door door desk radio'
-      'plant door door desk radio ';
-  }
-  .board {
-    width: 70%;
-  }
-
-  .radio {
-    margin-bottom: 0rem;
-  }
-  .door {
-    width: 50%;
-  }
-}
-
 
 @media screen and (max-width: 768px) {
-
   .room {
     padding: 0rem;
   }
 
+  .alpha-centauri {
+    padding-left: 1rem;
+  }
+
   .board,
   .clock,
+  .radio,
   .plant,
   .bike {
     width: 90%;
   }
 
-  .desk-comp {
+  .deskComp {
     width: 50%;
   }
-
-}
-
-@media screen and (max-height: 300px) {
-  .board {
-    width: 70%;
+  .lamp {
+    width: 140%;
   }
 }
 
@@ -241,7 +204,7 @@
   .door {
     width: 75%;
   }
-  .desk-comp {
+  .deskComp {
     width: 60%;
   }
   .lamp {
@@ -273,7 +236,7 @@
   .door {
     width: 110%;
   }
-  .desk-comp {
+  .deskComp {
     width: 90%;
   }
   .lamp {
@@ -290,5 +253,13 @@
       'bike door'
       'plant lamp'
       'desk radio';
+  }
+  .radio {
+    margin-bottom: 3rem;
+    width: 60%;
+  }
+  .door,
+  .lamp {
+    width: 100%;
   }
 }

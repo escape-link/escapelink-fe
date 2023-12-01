@@ -2,13 +2,15 @@ import './Story.css';
 import background from '../../assets/big-donut.jpg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { fetchGameLink } from '../../apiCalls';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Leaderboard from '../Leaderboard/Leaderboard';
+import Loading from '../Loading/Loading';
 
 export default function Story() {
   const navigate = useNavigate();
   const { displayedRoomName } = useParams();
   const [openLeaderboard, setOpenLeaderboard] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const startGame = async () => {
     try {
@@ -24,10 +26,20 @@ export default function Story() {
     setOpenLeaderboard(!openLeaderboard);
   };
 
+  useEffect(() => {
+    const image = new Image();
+    image.src = background;
+    image.onload = () => {
+      setIsImageLoaded(true);
+    };
+  }, []);
+
   return (
     <section
       className="story-body"
       style={{ '--background': `url(${background})` }}>
+         {!isImageLoaded ? <Loading /> : 
+         <>
       {openLeaderboard && (
         <Leaderboard handleLeaderboardClick={handleLeaderboardClick} />
       )}
@@ -77,6 +89,8 @@ export default function Story() {
           </button>
         )}
       </div>
+      </>
+}
     </section>
   );
 }

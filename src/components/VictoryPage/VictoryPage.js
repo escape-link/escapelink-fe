@@ -1,12 +1,24 @@
 import './VictoryPage.css';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import background from '../../assets/big-donut.jpg';
 import Leaderboard from '../Leaderboard/Leaderboard';
+import Loading from '../Loading/Loading';
 
 export default function VictoryPage() {
   const navigate = useNavigate();
   const [openLeaderboard, setOpenLeaderboard] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = background;
+    image.onload = () => {
+      setIsImageLoaded(true);
+    };
+  }, []);
+
 
   const handleBackToStoryClick = () => {
     navigate('/');
@@ -20,6 +32,8 @@ export default function VictoryPage() {
     <div
       className="victory-page"
       style={{ '--background': `url(${background})` }}>
+        {!isImageLoaded ? <Loading /> : 
+        <>
       {openLeaderboard && (
         <Leaderboard handleLeaderboardClick={handleLeaderboardClick} />
       )}
@@ -38,6 +52,8 @@ export default function VictoryPage() {
           </button>
         )}
       </div>
+      </>
+}
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import './Leaderboard.css';
 import { fetchLeaderboard } from '../../apiCalls';
+import Loading from '../Loading/Loading';
 
 export default function Leaderboard({ handleLeaderboardClick }) {
   const [scores, setScores] = useState([]);
   const modalRef = useRef();
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (modalRef.current) {
@@ -13,13 +15,16 @@ export default function Leaderboard({ handleLeaderboardClick }) {
   }, []);
 
   useEffect(() => {
+    setIsLoading(false)
     const getLeaderboard = async () => {
+      setIsLoading(true)
       try {
         const leaderboardData = await fetchLeaderboard();
         setScores(leaderboardData);
       } catch (err) {
         console.log(err);
       }
+      setIsLoading(false)
     };
     getLeaderboard();
   }, []);
@@ -41,14 +46,18 @@ export default function Leaderboard({ handleLeaderboardClick }) {
       );
     });
 
-  return (
-    <div tabIndex="-1" ref={modalRef} className="leaderboard-container">
+  return ( 
+  
+    <div tabIndex="-1" ref={modalRef}  className={`leaderboard-container${isLoading ? ' loading' : ''}`}>
+     {  isLoading ?  <Loading /> :
+      <>
       <button
         aria-label="close"
         className="exit"
         onClick={() => handleLeaderboardClick()}>
         X
       </button>
+      
       <h1 tabIndex="0" className="leaderboard">
         Leaderboard
       </h1>
@@ -58,6 +67,9 @@ export default function Leaderboard({ handleLeaderboardClick }) {
         <div>Time</div>
       </div>
       <ol className="leaderboard-list">{leaderboardScores}</ol>
+      </>
+      }
     </div>
+
   );
 }
