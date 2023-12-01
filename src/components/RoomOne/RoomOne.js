@@ -73,7 +73,7 @@ export default function RoomOne() {
     };
 
     loadAllImages();
-  }, [roomImages]);
+  }, []);
 
   const toggleCipherVisibility = () => {
     setIsCipherVisible(!isCipherVisible);
@@ -230,7 +230,7 @@ export default function RoomOne() {
               <button
                 className="board-btn"
                 onClick={toggleCipherVisibility}
-                tabIndex={isCipherVisible ? 0 : -1}>
+                tabIndex={isCipherVisible ? -1 : 0}>
                 <img className="board" src={board} alt="board" />
               </button>
               <button
@@ -259,7 +259,7 @@ export default function RoomOne() {
                 subscription={subscription}
               />
               {roomStyle['--room-bg'] === 'none' && (
-                <span className="alpha-centauri">⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟</span>
+                <span tabIndex='0' className="alpha-centauri">⏃⌰⌿⊑⏃ ☊⟒⋏⏁⏃⎍⍀⟟</span>
               )}
             </article>
           )}

@@ -32,7 +32,7 @@ export default function Story() {
     image.onload = () => {
       setIsImageLoaded(true);
     };
-  }, [background]);
+  }, []);
 
   return (
     <section

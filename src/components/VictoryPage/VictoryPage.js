@@ -17,7 +17,7 @@ export default function VictoryPage() {
     image.onload = () => {
       setIsImageLoaded(true);
     };
-  }, [background]);
+  }, []);
 
 
   const handleBackToStoryClick = () => {
