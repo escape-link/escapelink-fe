@@ -38,7 +38,6 @@
 
 .clock-btn:hover,
 .plant-btn:hover,
-.door-btn:hover,
 .bike-btn:hover,
 .board-btn:hover,
 .deskComp-btn:hover,
@@ -146,6 +145,17 @@
 .alpha-centauri {
   color: white;
   margin-bottom: 3rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media screen and (max-width: 1025px) {

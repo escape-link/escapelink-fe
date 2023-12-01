@@ -1,14 +1,14 @@
 import './Chat.css';
-import {useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ChatWindow from '../ChatWindow/ChatWindow';
 
-export default function Chat({subscription, allMessages}) {
+export default function Chat({ subscription, allMessages }) {
   const [nickname, setNickname] = useState('');
   const [currentMessage, setCurrentMessage] = useState('');
   const [hasNickname, setHasNickname] = useState(false);
   const { backendData } = useParams();
-  const [chatOpen, setChatOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false);
 
   const handleSubmitMessage = (e) => {
     subscription.send({
@@ -24,13 +24,25 @@ export default function Chat({subscription, allMessages}) {
   };
 
   const openPopOutChat = () => {
-    setChatOpen(!chatOpen)
-  }
-  
+    setChatOpen(!chatOpen);
+  };
+
   return (
-    <div className='chat'>
-       <button className={`see-message-btn ${chatOpen ? 'hidden' : ''}`} onClick={openPopOutChat}>See Messages</button>
-    {chatOpen && <ChatWindow allMessages={allMessages} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} handleSubmitMessage={handleSubmitMessage} openPopOutChat={openPopOutChat} />}
+    <div className="chat">
+      <button
+        className={`see-message-btn ${chatOpen ? 'hidden' : ''}`}
+        onClick={openPopOutChat}>
+        See Messages
+      </button>
+      {chatOpen && (
+        <ChatWindow
+          allMessages={allMessages}
+          currentMessage={currentMessage}
+          setCurrentMessage={setCurrentMessage}
+          handleSubmitMessage={handleSubmitMessage}
+          openPopOutChat={openPopOutChat}
+        />
+      )}
       {!hasNickname ? (
         <div className={`name ${chatOpen ? 'hidden' : ''}`}>
           <label htmlFor="nickname" />
@@ -42,10 +54,12 @@ export default function Chat({subscription, allMessages}) {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <button className='enter' onClick={handleNickname}>Enter</button>
+          <button className="enter" onClick={handleNickname}>
+            Enter
+          </button>
         </div>
       ) : (
-        <div className={`greetings ${chatOpen ? 'hidden' : ''}`}>
+        <div tabIndex="0" className={`greetings ${chatOpen ? 'hidden' : ''}`}>
           <p>Greetings {nickname}</p>
         </div>
       )}
