@@ -200,6 +200,9 @@ export default function RoomOne() {
 
   return (
     <div>
+      <p className="sr-only">
+        This escape room has five puzzles to solve and two puzzle clues.
+      </p>
       {!allImagesLoaded ? (
         <Loading />
       ) : (
@@ -218,6 +221,11 @@ export default function RoomOne() {
                   }`}
                   onClick={() => handlePuzzleClick(puzzle)}
                   tabIndex={isDisabled[puzzle.identifier] ? -1 : 0}>
+                  {isDisabled[puzzle.identifier] && (
+                    <span role="alert" className="sr-only">
+                      Puzzle Complete
+                    </span>
+                  )}
                   <img
                     className={puzzle.class}
                     src={puzzle.image}
@@ -225,9 +233,11 @@ export default function RoomOne() {
                   />
                 </button>
               ))}
-              <button className="door-btn" tabIndex={0}>
+
+              <div className="door-btn">
                 <img className="door" src={door} alt="door" />
-              </button>
+              </div>
+
               <button
                 className="board-btn"
                 onClick={toggleCipherVisibility}
