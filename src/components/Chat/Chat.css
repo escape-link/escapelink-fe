@@ -64,3 +64,15 @@
     max-width: 8.4em;
   }
 }
+@media screen and (max-height: 300px) {
+  .see-message-btn,
+  .enter
+   {
+    max-width:15em;
+  }
+  
+  #nickname {
+    max-width: 8.4em;
+    font-size: .9em;
+  }
+}

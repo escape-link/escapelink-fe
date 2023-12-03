@@ -45,7 +45,9 @@ export default function Chat({ subscription, allMessages }) {
       )}
       {!hasNickname ? (
         <div className={`name ${chatOpen ? 'hidden' : ''}`}>
-          <label htmlFor="nickname" />
+          <label htmlFor="nickname" >
+          <span class="sr-only">your name for sending messages</span>
+          </label>
           <input
             id="nickname"
             name="nickname"

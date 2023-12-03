@@ -119,7 +119,7 @@ export default function Story() {
             </button>
 
             <button className="copy" onClick={copy}>
-              {!copied ? 'Copy link to Share' : 'Copied!'}
+              {!copied ? 'Copy Link to Share' : 'Copied!'}
             </button>
           </div>
 
