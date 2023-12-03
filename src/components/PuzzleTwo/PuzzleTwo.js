@@ -40,7 +40,7 @@ export default function PuzzleTwo({
       <p role="alert">{incorrect}</p>
       <h1 tabIndex="0">Radio Frequency: Tune to the correct station.</h1>
       <p tabIndex="0">
-        The first digit of the radio station is the second digit of the year of
+        The first digit of the radio station is the second digit of
         the year area 51 was founded. The second is the only number whose
         English name has the same number of letters as its value. For the last
         digit, which follows a decimal point, look for the Leo constellation and
